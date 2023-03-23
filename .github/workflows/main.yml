@@ -76,6 +76,9 @@ jobs:
         with:
           name: version
 
+      - name: Print semantic version from version artifact
+        run: echo $(cat version.txt)
+
       - name: Install and configure kubectl
         run: |
           VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
