@@ -28,5 +28,8 @@
     "react-icons": "^4.8.0",
     "styled-components": "^5.3.9",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
   }
 }
