@@ -37,6 +37,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Print semantic version
+        run: echo ${{ steps.semantic.outputs.version }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
