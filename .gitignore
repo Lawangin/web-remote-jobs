@@ -36,7 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 nextjs-secrets.yaml
-nextjs-deployment.yaml
 nextjs-ingress.yaml
 nextjs-exporter-service-monitor.yaml
 nextjs-service.yaml
