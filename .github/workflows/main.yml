@@ -31,7 +31,7 @@ jobs:
         uses: codfish/semantic-release-action@v1
         id: semantic
         with:
-          dry_run: true
+          dry_run: false
           commit_analyzer_args: --release-rules ./release-rules.json
           branches: main
         env:
