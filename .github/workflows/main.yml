@@ -28,14 +28,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Get semantic version
-        uses: relekang/action-semantic-release@v1
+        uses: codfish/semantic-release-action@v1
         id: semantic
         with:
-          dry_run: false
+          dry_run: true
           commit_analyzer_args: --release-rules ./release-rules.json
           branches: main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
