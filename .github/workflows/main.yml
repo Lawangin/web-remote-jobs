@@ -32,7 +32,7 @@ jobs:
         id: semantic
         with:
           dry_run: false
-          commit_analyzer_args: --release-rules ./release-rules.json
+          commit_analyzer_args: --debug --release-rules ./release-rules.json
           branches: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
