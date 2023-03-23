@@ -28,10 +28,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Get semantic version
-        uses: semantic-release/semantic-release@v17
+        uses: codfish/semantic-release-action@v1
         id: semantic
         with:
-          semantic_version: true
           dry_run: true
           commit_analyzer_args: --release-rules ./release-rules.json
         env:
