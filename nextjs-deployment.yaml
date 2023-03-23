@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: lawanginkhan/remote-jobs-nextjs-app:${DOCKER_TAG}
+          image: lawanginkhan/remote-jobs-nextjs-app:${VERSION}
           ports:
             - containerPort: 3000
           envFrom:

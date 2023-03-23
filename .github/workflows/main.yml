@@ -79,4 +79,4 @@ jobs:
           export VERSION=${{ steps.semantic.outputs.version }}
           envsubst < nextjs-deployment.yaml | kubectl apply -f
         env:
-          DOCKER_TAG: ${{ steps.semantic.outputs.version }}
+          VERSION: ${{ steps.semantic.outputs.version }}
