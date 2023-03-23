@@ -76,7 +76,7 @@ jobs:
       - name: Deploy to EKS
         run: |
           export KUBECONFIG=kubeconfig.yaml
-          export VERSION=${{ steps.semantic.outputs.version }}
+          export VERSION=${{ steps.semantic.outputs.release-version }}
           envsubst < nextjs-deployment.yaml | kubectl apply -f
         env:
-          VERSION: ${{ steps.semantic.outputs.version }}
+          DOCKER_TAG: ${{ steps.semantic.outputs.release-version }}
