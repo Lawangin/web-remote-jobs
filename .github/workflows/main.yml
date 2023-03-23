@@ -35,7 +35,7 @@ jobs:
           commit_analyzer_args: --release-rules ./release-rules.json
           branches: main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
