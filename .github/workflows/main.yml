@@ -46,7 +46,6 @@ jobs:
           context: .
           push: true
           tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.release-version }}
-          build-args: --no-cache=1
 
       - name: Save version to file
         run: echo "${{ steps.semantic.outputs.release-version }}" > version.txt

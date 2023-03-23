@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, createIcon, Text } from '@chakra-ui/react'
 import { Link } from '@chakra-ui/next-js'
-import { AiOutlineInfoCircle } from 'react-icons/Ai'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 import styled from 'styled-components'
 
 const Btn = styled.button`
