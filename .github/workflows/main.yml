@@ -77,7 +77,8 @@ jobs:
           name: version
 
       - name: Print semantic version from version artifact
-        run: echo $(cat version.txt)
+        id: print_version
+        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
       - name: Install and configure kubectl
         run: |
@@ -89,7 +90,6 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
           echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
-          cat kubeconfig.yaml
 
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
@@ -99,5 +99,4 @@ jobs:
           export KUBECONFIG=kubeconfig.yaml
           envsubst < nextjs-deployment.yaml | kubectl apply -f -
         env:
-          DOCKER_TAG: $(cat version.txt)
-          VERSION: $(cat version.txt)
+          DOCKER_TAG: $VERSION
