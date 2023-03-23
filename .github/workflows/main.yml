@@ -92,8 +92,8 @@ jobs:
 
       - name: Deploy to EKS
         run: |
+          export KUBECONFIG=kubeconfig.yaml
           envsubst < nextjs-deployment.yaml | kubectl apply -f -
         env:
           DOCKER_TAG: $(cat version.txt)
-          KUBECONFIG: kubeconfig.yaml
           VERSION: $(cat version.txt)
