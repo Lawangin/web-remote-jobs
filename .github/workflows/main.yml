@@ -47,6 +47,14 @@ jobs:
           push: true
           tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.release-version }}
 
+      - name: Save version as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: version
+          path: version.txt
+        run: |
+          echo "${{ steps.semantic.outputs.release-version }}" > version.txt
+
   deploy:
     needs: build_and_push
     runs-on: ubuntu-latest
@@ -62,6 +70,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Download version artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: version
+
       - name: Install and configure kubectl
         run: |
           VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
@@ -76,7 +89,7 @@ jobs:
       - name: Deploy to EKS
         run: |
           export KUBECONFIG=kubeconfig.yaml
-          export VERSION=${{ steps.semantic.outputs.release-version }}
+          export VERSION=$(cat version.txt)
           envsubst < nextjs-deployment.yaml | kubectl apply -f
         env:
-          DOCKER_TAG: ${{ steps.semantic.outputs.release-version }}
+          DOCKER_TAG: $(cat version.txt)
