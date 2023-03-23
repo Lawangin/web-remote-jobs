@@ -33,6 +33,7 @@ jobs:
         with:
           dry_run: true
           commit_analyzer_args: --release-rules ./release-rules.json
+          branches: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
