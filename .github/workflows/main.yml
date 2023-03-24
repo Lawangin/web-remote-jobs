@@ -31,6 +31,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Semantic Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' # run only on merge to main
         uses: cycjimmy/semantic-release-action@v3
         id: semantic
         with:
@@ -41,6 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print semantic version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: echo ${{ steps.semantic.outputs.new_release_version }}
 
       - name: Build and push Docker image
@@ -48,12 +50,15 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-          tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.new_release_version }}
+          # check to see if pushing to main, apply semmantic version, else apply sha version
+          tags: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && format('lawanginkhan/remote-jobs-nextjs-app:{0}', steps.semantic.outputs.new_release_version) || format('lawanginkhan/remote-jobs-nextjs-app:{0}', github.sha) }}
 
       - name: Save version to file
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: echo "${{ steps.semantic.outputs.new_release_version }}" > version.txt
 
       - name: Upload version as artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v3
         with:
           name: version
