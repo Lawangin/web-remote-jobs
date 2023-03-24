@@ -1,15 +1,16 @@
-'use client'
+"use client";
 
-import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider } from "@chakra-ui/react";
+import "./globals.css";
 
 export default function RootLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head />
       <body>
         <CacheProvider>
@@ -17,5 +18,5 @@ export default function RootLayout({
         </CacheProvider>
       </body>
     </html>
-  )
+  );
 }
