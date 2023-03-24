@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -62,7 +62,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
@@ -99,4 +99,4 @@ jobs:
           export KUBECONFIG=kubeconfig.yaml
           envsubst < nextjs-deployment.yaml | kubectl apply -f -
         env:
-          DOCKER_TAG: $VERSION
+          DOCKER_TAG: ${{ env.VERSION }}
