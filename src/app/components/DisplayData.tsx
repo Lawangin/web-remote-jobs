@@ -1,5 +1,5 @@
 import { Box, Text, Flex, Icon, Link } from "@chakra-ui/react";
-import { AiOutlineDollar } from "react-icons/Ai";
+import { AiOutlineDollar } from "react-icons/ai";
 import { TbBrandGoogleAnalytics } from "react-icons/Tb";
 import styled from "styled-components";
 
