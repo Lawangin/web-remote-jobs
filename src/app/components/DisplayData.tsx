@@ -1,6 +1,6 @@
 import { Box, Text, Flex, Icon, Link } from "@chakra-ui/react";
 import { AiOutlineDollar } from "react-icons/ai";
-import { TbBrandGoogleAnalytics } from "react-icons/Tb";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import styled from "styled-components";
 
 const Btn = styled.button`
