@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.new_release_version }}
 
       - name: Save version to file
@@ -59,6 +59,7 @@ jobs:
   deploy:
     needs: build_and_push
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
