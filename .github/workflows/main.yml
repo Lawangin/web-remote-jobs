@@ -51,7 +51,7 @@ jobs:
         run: echo "${{ steps.semantic.outputs.new_release_version }}" > version.txt
 
       - name: Upload version as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: version
           path: version.txt
@@ -72,7 +72,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Download version artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: version
 
