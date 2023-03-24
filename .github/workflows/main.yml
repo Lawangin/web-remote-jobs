@@ -27,28 +27,28 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Get semantic version
-        uses: codfish/semantic-release-action@v2
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
         id: semantic
         with:
-          dry_run: false
-          commit_analyzer_args: --debug --preset angular --release-rules ./release-rules.json
-          branches: main
+          semantic_version: 16
+          branches: |
+            ['main']
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print semantic version
-        run: echo ${{ steps.semantic.outputs.release-version }}
+        run: echo ${{ steps.semantic.outputs.new_release_version }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.release-version }}
+          tags: lawanginkhan/remote-jobs-nextjs-app:${{ steps.semantic.outputs.new_release_version }}
 
       - name: Save version to file
-        run: echo "${{ steps.semantic.outputs.release-version }}" > version.txt
+        run: echo "${{ steps.semantic.outputs.new_release_version }}" > version.txt
 
       - name: Upload version as artifact
         uses: actions/upload-artifact@v2
