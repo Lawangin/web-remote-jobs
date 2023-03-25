@@ -1,7 +1,7 @@
-import { Box, Flex, Icon, createIcon, Text } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/next-js";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import styled from "styled-components";
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import styled from 'styled-components';
 
 const Btn = styled.button`
   background-color: #97ffcd;
@@ -25,7 +25,7 @@ export default function TopBar() {
       borderBottom="2px solid #e1e1e1"
     >
       <Btn>Find Work</Btn>
-      <Flex align="center" ml={["20px", "30px", null, null]}>
+      <Flex align="center" ml={['20px', '30px', null, null]}>
         <Icon
           as={AiOutlineInfoCircle}
           w="25px"
