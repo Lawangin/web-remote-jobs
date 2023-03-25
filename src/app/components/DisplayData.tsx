@@ -1,7 +1,7 @@
-import { Box, Text, Flex, Icon, Link } from "@chakra-ui/react";
-import { AiOutlineDollar } from "react-icons/ai";
-import { TbBrandGoogleAnalytics } from "react-icons/tb";
-import styled from "styled-components";
+import { Box, Text, Flex, Icon, Link } from '@chakra-ui/react';
+import { AiOutlineDollar } from 'react-icons/ai';
+import { TbBrandGoogleAnalytics } from 'react-icons/tb';
+import styled from 'styled-components';
 
 const Btn = styled.button`
   padding: 12px 30px;
@@ -34,7 +34,7 @@ export default function DisplayData({
     <Box
       p="5"
       mt="30px"
-      width={{ base: "90%", md: "85%", lg: "55%" }}
+      width={{ base: '90%', md: '85%', lg: '55%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"
@@ -49,12 +49,12 @@ export default function DisplayData({
           borderRadius="5px"
           mt="5px"
         ></Box>
-        <Flex direction="column" ml={["24px", "30px", null, null]}>
+        <Flex direction="column" ml={['24px', '30px', null, null]}>
           <Text
             as="h2"
-            fontSize={["18px", "24px", null, null]}
+            fontSize={['18px', '24px', null, null]}
             fontWeight="700"
-            width={["100%", null]}
+            width={['100%', null]}
           >
             {Title}
           </Text>
@@ -78,8 +78,8 @@ export default function DisplayData({
         width="91%"
         maxW="91%"
         mx="auto"
-        alignItems={["center", null, null, null]}
-        direction={["column", "row"]}
+        alignItems={['center', null, null, null]}
+        direction={['column', 'row']}
         rowGap="4"
       >
         <Flex align="center">

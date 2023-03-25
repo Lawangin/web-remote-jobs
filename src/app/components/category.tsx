@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
-import { Box } from "@chakra-ui/react";
-import { Button, Flex, Text } from "@chakra-ui/react";
-import styled from "styled-components";
+import { Flex, Text, Box } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 export const Btn = styled.button`
   padding: 12px 25px;
@@ -26,7 +25,7 @@ export default function Category(props: myprops) {
     <Box
       p="5"
       mt="30px"
-      width={{ base: "90%", md: "85%", lg: "55%" }}
+      width={{ base: '90%', md: '85%', lg: '55%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"
@@ -35,10 +34,10 @@ export default function Category(props: myprops) {
     >
       <Text
         as="h1"
-        ml={{ sm: "4.5%" }}
+        ml={{ sm: '4.5%' }}
         mb="4"
-        textAlign={{ base: "center", sm: "left" }}
-        fontSize={["28px", "32px", null, null]}
+        textAlign={{ base: 'center', sm: 'left' }}
+        fontSize={['28px', '32px', null, null]}
         fontWeight="700"
       >
         Choose a Category
@@ -46,11 +45,11 @@ export default function Category(props: myprops) {
       <Flex
         maxW="91%"
         mx="auto"
-        flexDirection={{ base: "column", sm: "row" }}
+        flexDirection={{ base: 'column', sm: 'row' }}
         justify="space-between"
         rowGap="4"
       >
-        <Btn onClick={() => console.log("clicked")}>All Categories</Btn>
+        <Btn onClick={() => console.log('clicked')}>All Categories</Btn>
         <Btn>Software Eng</Btn>
         <Btn>FrontEnd Eng</Btn>
         <Btn>Data Analyst</Btn>
