@@ -18,6 +18,7 @@ export const Btn = styled.button`
 `;
 interface myprops {
   count: number;
+  handleFilterData:(st: string) => void;
 }
 
 export default function Category(props: myprops) {
@@ -49,24 +50,23 @@ export default function Category(props: myprops) {
         justify="space-between"
         rowGap="4"
       >
-        <Btn onClick={() => console.log('clicked')}>All Categories</Btn>
-        <Btn>Software Eng</Btn>
-        <Btn>FrontEnd Eng</Btn>
-        <Btn>Data Analyst</Btn>
-      </Flex>
-      <Box
-        py="3"
-        my="4"
-        width="91%"
-        maxW="91%"
-        mx="auto"
-        textAlign="center"
-        border="1px solid #E1E1E1"
-        borderRadius="5px"
-        fontSize="12px"
-        fontWeight="700"
-        backgroundColor="#F4F6FB"
-      >
+        <Btn onClick={() => props.handleFilterData(" ")}>All Categories</Btn>
+      <Btn onClick={() => props.handleFilterData("Software")}>Software Eng</Btn>
+      <Btn onClick={() => props.handleFilterData("Front")}>FrontEnd Eng</Btn>
+      <Btn onClick={() => props.handleFilterData("Data analyst")}>Data Analyst</Btn>
+    </Flex><Box
+      py="3"
+      my="4"
+      width="91%"
+      maxW="91%"
+      mx="auto"
+      textAlign="center"
+      border="1px solid #E1E1E1"
+      borderRadius="5px"
+      fontSize="12px"
+      fontWeight="700"
+      backgroundColor="#F4F6FB"
+    >
         {props.count} Jobs Found
       </Box>
     </Box>
