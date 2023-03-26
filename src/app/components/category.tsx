@@ -18,54 +18,54 @@ export const Btn = styled.button`
 `;
 interface myprops {
   count: number;
-  handleFilterData:(st: string) => void;
+  handleFilterData: (st: string) => void;
 }
 
 export default function Category(props: myprops) {
   return (
     <Box
-      p="5"
-      mt="30px"
+      p='5'
+      mt='30px'
       width={{ base: '90%', md: '85%', lg: '55%' }}
-      maxW="798px"
-      mx="auto"
-      border="1px solid #E1E1E1"
-      borderRadius="20px"
-      backgroundColor="#fff"
+      maxW='798px'
+      mx='auto'
+      border='1px solid #E1E1E1'
+      borderRadius='20px'
+      backgroundColor='#fff'
     >
       <Text
-        as="h1"
+        as='h1'
         ml={{ sm: '4.5%' }}
-        mb="4"
+        mb='4'
         textAlign={{ base: 'center', sm: 'left' }}
         fontSize={['28px', '32px', null, null]}
-        fontWeight="700"
+        fontWeight='700'
       >
         Choose a Category
       </Text>
       <Flex
-        maxW="91%"
-        mx="auto"
+        maxW='91%'
+        mx='auto'
         flexDirection={{ base: 'column', sm: 'row' }}
-        justify="space-between"
-        rowGap="4"
+        justify='space-between'
+        rowGap='4'
       >
-        <Btn onClick={() => props.handleFilterData(" ")}>All Categories</Btn>
-      <Btn onClick={() => props.handleFilterData("Software")}>Software Eng</Btn>
-      <Btn onClick={() => props.handleFilterData("Front")}>FrontEnd Eng</Btn>
-      <Btn onClick={() => props.handleFilterData("Data analyst")}>Data Analyst</Btn>
+        <Btn onClick={() => props.handleFilterData(' ')}>All Categories</Btn>
+      <Btn onClick={() => props.handleFilterData('Software')}>Software Eng</Btn>
+      <Btn onClick={() => props.handleFilterData('Front')}>FrontEnd Eng</Btn>
+      <Btn onClick={() => props.handleFilterData('Data analyst')}>Data Analyst</Btn>
     </Flex><Box
-      py="3"
-      my="4"
-      width="91%"
-      maxW="91%"
-      mx="auto"
-      textAlign="center"
-      border="1px solid #E1E1E1"
-      borderRadius="5px"
-      fontSize="12px"
-      fontWeight="700"
-      backgroundColor="#F4F6FB"
+      py='3'
+      my='4'
+      width='91%'
+      maxW='91%'
+      mx='auto'
+      textAlign='center'
+      border='1px solid #E1E1E1'
+      borderRadius='5px'
+      fontSize='12px'
+      fontWeight='700'
+      backgroundColor='#F4F6FB'
     >
         {props.count} Jobs Found
       </Box>

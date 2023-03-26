@@ -41,8 +41,8 @@ export default function Home() {
   }
 
   const handleFilterData = (filterTerm: string): void => {
-   const newData = dashboard.filter((data: mydata) => data.Title.toLowerCase().includes(filterTerm.toLowerCase()))
-   setFilterData(newData)
+   const newData = dashboard.filter((data: mydata) => data.Title.toLowerCase().includes(filterTerm.toLowerCase()));
+   setFilterData(newData);
   }
 
   const dashboardList =
