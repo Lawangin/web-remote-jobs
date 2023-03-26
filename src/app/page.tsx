@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Text} from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import Category from './components/category';
 import TopBar from './components/TopBar';
 import DisplayData from './components/DisplayData';
@@ -23,8 +23,6 @@ export default function Home() {
     fetchDashboard();
   }, []);
 
-  
-
   interface mydata {
     id: string;
     Date: string;
@@ -40,9 +38,12 @@ export default function Home() {
     Link: string;
   }
 
-  const handleFilterData = (filterTerm: string): void => {
-   const newData = dashboard.filter((data: mydata) => data.Title.toLowerCase().includes(filterTerm.toLowerCase()));
-   setFilterData(newData);
+  function handleFilterData(filterTerm: string, e: any): void {
+    e.preventDefault();
+    const newData = dashboard.filter((data: mydata) =>
+      data.Title.toLowerCase().includes(filterTerm.toLowerCase())
+    );
+    setFilterData(newData);
   }
 
   const dashboardList =
@@ -62,8 +63,19 @@ export default function Home() {
   return (
     <>
       <TopBar />
-      {filterData && <Category count={filterData.length} handleFilterData={handleFilterData}/>}
-      {loading ? <Text textAlign="center" mt="20px" fontSize="20px">Loading...</Text> : dashboardList}
+      {filterData && (
+        <Category
+          count={filterData.length}
+          handleFilterData={handleFilterData}
+        />
+      )}
+      {loading ? (
+        <Text textAlign="center" mt="20px" fontSize="20px">
+          Loading...
+        </Text>
+      ) : (
+        dashboardList
+      )}
     </>
   );
 }
