@@ -1,20 +1,21 @@
 'use client';
-
+import { useState } from 'react';
 import { Flex, Text, Box } from '@chakra-ui/react';
 import styled from 'styled-components';
 
-export const Btn = styled.button`
+interface styleProps {
+  selected: boolean;
+}
+
+export const Btn = styled.button<styleProps>`
   padding: 12px 25px;
   text-align: center;
-  background-color: #f4f6fb;
+  background-color: ${props => (props.selected ? '#00ba61' : '#f4f6fb')};
   border: 0;
+  color: ${props => (props.selected ? '#ffffff' : '#000000')};
   border-radius: 0.5rem;
   font-size: 12px;
   font-weight: 700;
-  &:focus {
-    color: #fff;
-    background-color: #00ba61;
-  }
 `;
 interface myprops {
   count: number;
@@ -22,7 +23,19 @@ interface myprops {
   handleFilterData: (st: string, e: any) => void;
 }
 
+interface mystate {
+  firstBtn: boolean;
+  secondBtn: boolean;
+  thirdBtn: boolean;
+  fourthBtn: boolean;
+}
 export default function Category(props: myprops) {
+  const [selectedBtn, setSelected] = useState<mystate>({
+    firstBtn: true,
+    secondBtn: false,
+    thirdBtn: false,
+    fourthBtn: false,
+  });
   return (
     <Box
       p="5"
@@ -52,24 +65,45 @@ export default function Category(props: myprops) {
         rowGap="4"
       >
         <Btn
+          selected={selectedBtn.firstBtn}
           onClick={e => {
             const st = ' ';
+            setSelected({
+              firstBtn: true,
+              secondBtn: false,
+              thirdBtn: false,
+              fourthBtn: false,
+            });
             props.handleFilterData(st, e);
           }}
         >
           All Categories
         </Btn>
         <Btn
+          selected={selectedBtn.secondBtn}
           onClick={e => {
             const st = 'software';
+            setSelected({
+              firstBtn: false,
+              secondBtn: true,
+              thirdBtn: false,
+              fourthBtn: false,
+            });
             props.handleFilterData(st, e);
           }}
         >
           Software Eng
         </Btn>
         <Btn
+          selected={selectedBtn.thirdBtn}
           onClick={e => {
             const st = 'front';
+            setSelected({
+              firstBtn: false,
+              secondBtn: false,
+              thirdBtn: true,
+              fourthBtn: false,
+            });
             props.handleFilterData(st, e);
           }}
         >
@@ -77,8 +111,15 @@ export default function Category(props: myprops) {
           FrontEnd Eng{' '}
         </Btn>
         <Btn
+          selected={selectedBtn.fourthBtn}
           onClick={e => {
             const st = 'data analyst';
+            setSelected({
+              firstBtn: false,
+              secondBtn: false,
+              thirdBtn: false,
+              fourthBtn: true,
+            });
             props.handleFilterData(st, e);
           }}
         >
