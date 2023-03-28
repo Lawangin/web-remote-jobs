@@ -12,7 +12,12 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier":[
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
     // Add any project-specific rules here
   },
   "settings": {
