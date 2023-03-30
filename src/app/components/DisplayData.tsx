@@ -4,7 +4,7 @@ import { TbBrandGoogleAnalytics } from 'react-icons/tb';
 import styled from 'styled-components';
 
 const Btn = styled.button`
-  padding: 12px 30px;
+  padding: 11px 28px;
   text-align: center;
   color: #fff;
   background-color: #00ba61;
@@ -34,7 +34,7 @@ export default function DisplayData({
     <Box
       p="5"
       mt="30px"
-      width={{ base: '90%', md: '85%', lg: '55%' }}
+      width={{ base: '90%', md: '85%', lg: '60%', xl: '55%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"
@@ -92,7 +92,12 @@ export default function DisplayData({
           />
           {Salary !== null ? (
             <>
-              <Text fontSize="20px" fontWeight="700" ml="5px">
+              <Text
+                fontSize={['18px', '13px', '18px']}
+                fontWeight="700"
+                ml="5px"
+                width="100%"
+              >
                 {Salary}
               </Text>
               <Text fontSize="16px" color="#939598" ml="3px" mt="2px">
@@ -100,7 +105,12 @@ export default function DisplayData({
               </Text>
             </>
           ) : (
-            <Text fontSize="20px" fontWeight="700" color="#939598" ml="5px">
+            <Text
+              fontSize={['18px', '13px', '18px']}
+              fontWeight="700"
+              color="#939598"
+              ml="5px"
+            >
               Not Available
             </Text>
           )}
@@ -115,7 +125,7 @@ export default function DisplayData({
             mt="2px"
           />
           <Text
-            fontSize="20px"
+            fontSize={['18px', '13px', '18px']}
             fontWeight="700"
             color="#939598"
             ml="5px"
