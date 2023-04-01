@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set the working directory
 WORKDIR /app
 
-# Install required system dependencies
-RUN apk add --no-cache --virtual .gyp python3 make g++
+# Install libpq-dev package
+RUN apk update && apk add --no-cache postgresql-dev python3 py3-pip make g++
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -18,9 +18,6 @@ COPY . .
 
 # Build the Next.js app
 RUN npm run build
-
-# Remove the build-time dependencies
-RUN apk del .gyp
 
 # Expose the port the app will run on
 EXPOSE 3000
