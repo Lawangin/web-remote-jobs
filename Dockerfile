@@ -6,6 +6,9 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Install required system dependencies
+RUN apk add --no-cache --virtual .gyp python3 make g++
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -31,6 +34,9 @@ COPY . .
 # RUN yarn build
 
 RUN npm run build
+
+# Remove the build-time dependencies
+RUN apk del .gyp
 
 # Production image, copy all the files and run next
 FROM base AS runner
