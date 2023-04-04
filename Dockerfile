@@ -1,14 +1,17 @@
 # Base image
-FROM node:16.8.0-alpine
+FROM node:18-alpine
 
 # Set the working directory
 WORKDIR /app
 
+# Install libpq-dev package
+RUN apk update && apk add --no-cache postgresql-dev python3 py3-pip make g++
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies. npm ci may cause issues if package-lock.json isn't upgraded properly and will look for missing dependencies that are pushed up.
+RUN npm install
 
 # Copy the rest of the app files
 COPY . .
