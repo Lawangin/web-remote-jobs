@@ -1,6 +1,8 @@
-import { Box, Text, Flex, Icon, Link } from '@chakra-ui/react';
+import { Box, Text, Flex, Icon, Link as NextLink } from '@chakra-ui/react';
 import { AiOutlineDollar } from 'react-icons/ai';
+import { useState } from 'react';
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
+import DataDetailPage from './DataDetailPage';
 import styled from 'styled-components';
 
 const Btn = styled.button`
@@ -14,22 +16,40 @@ const Btn = styled.button`
   font-weight: 700;
 `;
 type ChildComponentProps = {
+  key: number;
   Title: string;
   Company: string;
   Description: string;
+  Location: string;
   Salary: number;
   Level: string;
+  Type: string;
+  Function: string;
+  Industry: string;
   URL: string;
+  image_url: string;
 };
 
 export default function DisplayData({
+  key,
   Title,
   Company,
   Description,
   Salary,
+  Type,
+  Function,
+  Location,
+  Industry,
   Level,
   URL,
+  image_url,
 }: ChildComponentProps) {
+  const [popUpState, setPopState] = useState<boolean>(false);
+
+  const handlePopUpState = () => {
+    setPopState(!popUpState);
+  };
+
   return (
     <Box
       p="5"
@@ -41,6 +61,24 @@ export default function DisplayData({
       borderRadius="20px"
       backgroundColor="#fff"
     >
+      {popUpState && (
+        <DataDetailPage
+          key={key}
+          Title={Title}
+          Company={Company}
+          Location={Location}
+          Description={Description}
+          Salary={Salary}
+          Type={Type}
+          Industry={Industry}
+          Function={Function}
+          Level={Level}
+          URL={URL}
+          image_url={image_url}
+          handlePopUpState={handlePopUpState}
+        />
+      )}
+
       <Flex align="center" maxW="91%" mx="auto">
         <Box
           w="60px"
@@ -55,6 +93,8 @@ export default function DisplayData({
             fontSize={['18px', '24px', null, null]}
             fontWeight="700"
             width={['100%', null]}
+            cursor="pointer"
+            onClick={handlePopUpState}
           >
             {Title}
           </Text>
@@ -63,22 +103,24 @@ export default function DisplayData({
           </Text>
         </Flex>
       </Flex>
-      <Text
-        fontSize="16px"
-        color="#2F2E41"
-        my="20px"
-        maxW="91%"
-        mx="auto"
-        noOfLines={3}
-      >
-        {Description}
-      </Text>
+      <Box>
+        <Text
+          fontSize="16px"
+          color="#2F2E41"
+          my="20px"
+          maxW="91%"
+          mx="auto"
+          noOfLines={3}
+        >
+          {Description}
+        </Text>
+      </Box>
       <Flex
         justify="space-between"
         width="91%"
         maxW="91%"
         mx="auto"
-        alignItems={['center', null, null, null]}
+        align={['center', null, null, null]}
         direction={['column', 'row']}
         rowGap="4"
       >
@@ -115,7 +157,6 @@ export default function DisplayData({
             </Text>
           )}
         </Flex>
-
         <Flex align="center">
           <Icon
             as={TbBrandGoogleAnalytics}
@@ -135,9 +176,9 @@ export default function DisplayData({
           </Text>
         </Flex>
         <Btn>
-          <Link href={URL} isExternal>
+          <NextLink href={URL} isExternal>
             Apply Now
-          </Link>
+          </NextLink>
         </Btn>
       </Flex>
     </Box>

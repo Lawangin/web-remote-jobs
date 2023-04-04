@@ -36,6 +36,7 @@ export default function Home() {
     Function: string;
     Industry: string;
     Link: string;
+    image_url: string;
   }
 
   function handleFilterData(filterTerm: string, e: any): void {
@@ -54,9 +55,14 @@ export default function Home() {
         Title={data.Title}
         Company={data.Company}
         Description={data.Description}
+        Location={data.Location}
         Salary={data.Salary}
         Level={data.Level}
+        Type={data.Type}
+        Industry={data.Industry}
+        Function={data.Function}
         URL={data.Link}
+        image_url={data.image_url}
       />
     ));
 
