@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { Box, Flex, Text, Icon, Link, Image } from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
@@ -52,6 +53,46 @@ export default function DataDetailPage({
   image_url,
   handlePopUpState,
 }: ChildComponentProps) {
+  function splitLines(text: string) {
+    // Split the input text by newline characters
+    const lines = text.split('\n');
+    // Define the maximum number of consecutive <br /> elements
+    const maxConsecutiveBreaks = 2;
+    // Initialize a counter to track the number of consecutive breaks
+    let consecutiveBreaks = 0;
+
+    // Use the flatMap function to iterate over the lines array
+    return lines.flatMap((line, index) => {
+      // If the line is an empty string, meaning it's a newline character
+      if (line === '') {
+        consecutiveBreaks++;
+        // If the counter has reached the maximum allowed consecutive breaks
+        if (consecutiveBreaks >= maxConsecutiveBreaks) {
+          // Return an empty array to skip the current newline character
+          return [];
+        } else {
+          // Otherwise, return a single <br /> element wrapped in a Fragment
+          return (
+            <Fragment key={index}>
+              <br />
+            </Fragment>
+          );
+        }
+      } else {
+        // If the line is not an empty string, reset the consecutive breaks counter
+        consecutiveBreaks = 0;
+
+        // Return the current line with an additional <br /> element (except for the last line)
+        return (
+          <Fragment key={index}>
+            {line}
+            {index !== lines.length - 1 && <br />}
+          </Fragment>
+        );
+      }
+    });
+  }
+
   return (
     <Box
       background="#00000050"
