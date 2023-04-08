@@ -3,12 +3,13 @@
 import { Box, Flex, Text, Icon, Link, Image } from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
-import { AiOutlineDollar, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineDollar } from 'react-icons/ai';
+import { SiGoogleanalytics } from 'react-icons/si';
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
 import styled from 'styled-components';
 
 const Btn = styled.button`
-  width: 77%;
+  width: 95%;
   height: 44px;
   text-align: center;
   color: #fff;
@@ -53,143 +54,154 @@ export default function DataDetailPage({
 }: ChildComponentProps) {
   return (
     <Box
-      pt="70px"
-      backgroundColor="#fff"
+      background="#00000050"
       position="fixed"
       top="0"
-      left="50%"
-      overflow="scroll"
+      left="0"
+      width="100%"
       height="100vh"
+      zIndex="1"
+      onClick={handlePopUpState}
     >
-      <Box maxW="91%" mx="auto" position="relative">
-        <Flex align="start">
-          <Box w="78px" h="78px" backgroundColor="#d9d9d9" borderRadius="5px">
-            <Image src={image_url} width="100%" alt=""></Image>
-          </Box>
-          <Flex direction="column" ml={['24px', '30px', null, null]}>
-            <Text
-              as="h2"
-              m="0"
-              fontSize={['18px', '24px', null, null]}
-              fontWeight="700"
-              width={['100%', null]}
-            >
-              {Title}
-            </Text>
-            <Flex align="center">
-              <Icon as={MdLocationOn} w="17px" h="17px" color="#b7b6b3" />
-              <Text fontSize="16px" color="#939598" ml="8px">
-                {Location}
+      <Box
+        maxW="60%"
+        marginLeft="auto"
+        position="relative"
+        backgroundColor="#fff"
+        overflow="auto"
+        zIndex="auto"
+        maxHeight="100vh"
+        borderLeft="2px solid #b7b6b3"
+        padding="10px"
+      >
+        <Box maxW="80%" margin="50px auto 20px auto">
+          <Flex align="start">
+            <Box w="78px" h="78px" backgroundColor="#d9d9d9" borderRadius="5px">
+              <Image src={image_url} width="100%" alt=""></Image>
+            </Box>
+            <Flex direction="column" ml={['24px', '30px', null, null]}>
+              <Text
+                as="h2"
+                m="0"
+                fontSize={['18px', '24px', null, null]}
+                fontWeight="700"
+                width={['100%', null]}
+              >
+                {Title}
               </Text>
-            </Flex>
-            <Flex align="center">
-              <Icon
-                as={RiBuildingFill}
-                w="17px"
-                h="17px"
-                color="#b7b6b3"
-                mt="0"
-              />
-              <Text fontSize="16px" color="#939598" ml="8px" my="0">
-                {Company}
-              </Text>
+              <Flex align="center">
+                <Icon as={MdLocationOn} w="17px" h="17px" color="#b7b6b3" />
+                <Text fontSize="16px" color="#939598" ml="8px">
+                  {Location}
+                </Text>
+              </Flex>
+              <Flex align="center">
+                <Icon
+                  as={RiBuildingFill}
+                  w="17px"
+                  h="17px"
+                  color="#b7b6b3"
+                  mt="0"
+                />
+                <Text fontSize="16px" color="#939598" ml="8px" my="0">
+                  {Company}
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
-          <Icon
-            as={AiOutlineClose}
-            w="20px"
-            h="20px"
-            ml="150px"
-            onClick={handlePopUpState}
-          />
-        </Flex>
-        <Flex align="center" mt="30px">
-          <Flex align="center">
-            <Icon as={AiOutlineDollar} w="25px" h="25px" color="#006333" />
-            <>
-              {Salary !== null ? (
-                <>
+          <Flex align="center" mt="30px">
+            <Flex align="center">
+              <Icon as={AiOutlineDollar} w="25px" h="25px" color="#006333" />
+              <>
+                {Salary !== null ? (
+                  <>
+                    <Text
+                      fontSize={['18px', '13px', '18px']}
+                      fontWeight="700"
+                      ml="5px"
+                      width="100%"
+                    >
+                      {Salary}
+                    </Text>
+                    <Text fontSize="16px" color="#939598" ml="3px" mt="2px">
+                      /Year
+                    </Text>
+                  </>
+                ) : (
                   <Text
                     fontSize={['18px', '13px', '18px']}
                     fontWeight="700"
+                    color="#939598"
                     ml="5px"
-                    width="100%"
                   >
-                    {Salary}
+                    Not Available
                   </Text>
-                  <Text fontSize="16px" color="#939598" ml="3px" mt="2px">
-                    /Year
-                  </Text>
-                </>
-              ) : (
-                <Text
-                  fontSize={['18px', '13px', '18px']}
-                  fontWeight="700"
-                  color="#939598"
-                  ml="5px"
-                >
-                  Not Available
-                </Text>
-              )}
-            </>
+                )}
+              </>
+            </Flex>
+            <Flex ml="60px">
+              <Icon
+                as={
+                  Level === 'Mid-Senior level'
+                    ? SiGoogleanalytics
+                    : TbBrandGoogleAnalytics
+                }
+                w="25px"
+                h="25px"
+                color="#006333"
+                fill="50%"
+                mt="2px"
+              />
+              <Text
+                fontSize={['18px', '13px', '18px']}
+                fontWeight="700"
+                color="#939598"
+                ml="5px"
+                mt="2px"
+                mb="0"
+              >
+                {Level}
+              </Text>
+            </Flex>
           </Flex>
-          <Flex align="center" ml="60px">
-            <Icon
-              as={TbBrandGoogleAnalytics}
-              w="25px"
-              h="25px"
-              color="#006333"
-              mt="2px"
-            />
-            <Text
-              fontSize={['18px', '13px', '18px']}
-              fontWeight="700"
-              color="#939598"
-              ml="5px"
-              mt="2px"
-              mb="0"
-            >
-              {Level}
+          <Flex direction="column" mt="30px">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+              About The Job
+            </Text>
+            <Text fontSize="16px" color="#2F2E41" width="95%" mt="15px" mb="0">
+              {Description}
             </Text>
           </Flex>
-        </Flex>
-        <Flex direction="column" mt="30px">
-          <Text as="h3" fontSize="16px" fontWeight="700" my="0">
-            About The Job
-          </Text>
-          <Text fontSize="16px" color="#2F2E41" width="77%" mt="15px" mb="0">
-            {Description}
-          </Text>
-        </Flex>
-        <Flex direction="column" mt="30px">
-          <Text as="h3" fontSize="16px" fontWeight="700" my="0">
-            Industry:
-          </Text>
-          <Text fontSize="16px" mt="15px" mb="0">
-            {Industry}
-          </Text>
-        </Flex>
-        <Flex direction="column" mt="20px">
-          <Text as="h3" fontSize="16px" fontWeight="700" my="0">
-            Department:
-          </Text>
-          <Text fontSize="16px" mt="15px" mb="0">
-            {Function}
-          </Text>
-        </Flex>
-        <Flex direction="column" mt="20px">
-          <Text as="h3" fontSize="16px" fontWeight="700" my="0">
-            Type:
-          </Text>
-          <Text fontSize="16px" mt="15px" mb="0">
-            {Type}
-          </Text>
-        </Flex>
-        <Btn>
-          <Link href={URL} isExternal>
-            Apply Now
-          </Link>
-        </Btn>
+          <Flex direction="column" mt="30px">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+              Industry:
+            </Text>
+            <Text fontSize="16px" mt="15px" mb="0">
+              {Industry}
+            </Text>
+          </Flex>
+          <Flex direction="column" mt="20px">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+              Department:
+            </Text>
+            <Text fontSize="16px" mt="15px" mb="0">
+              {Function}
+            </Text>
+          </Flex>
+          <Flex direction="column" mt="20px">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+              Type:
+            </Text>
+            <Text fontSize="16px" mt="15px" mb="0">
+              {Type}
+            </Text>
+          </Flex>
+          <Btn>
+            <Link href={URL} isExternal>
+              Apply Now
+            </Link>
+          </Btn>
+        </Box>
       </Box>
     </Box>
   );

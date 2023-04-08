@@ -1,7 +1,16 @@
-import { Box, Text, Flex, Icon, Link as NextLink } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Flex,
+  Icon,
+  Image,
+  Link as NextLink,
+} from '@chakra-ui/react';
+
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
+import { SiGoogleanalytics } from 'react-icons/si';
 import DataDetailPage from './DataDetailPage';
 import styled from 'styled-components';
 
@@ -28,6 +37,7 @@ type ChildComponentProps = {
   Industry: string;
   URL: string;
   image_url: string;
+  handleBgColor: () => void;
 };
 
 export default function DisplayData({
@@ -43,11 +53,13 @@ export default function DisplayData({
   Level,
   URL,
   image_url,
+  handleBgColor,
 }: ChildComponentProps) {
   const [popUpState, setPopState] = useState<boolean>(false);
 
   const handlePopUpState = () => {
     setPopState(!popUpState);
+    handleBgColor();
   };
 
   return (
@@ -86,7 +98,9 @@ export default function DisplayData({
           backgroundColor="#d9d9d9"
           borderRadius="5px"
           mt="5px"
-        ></Box>
+        >
+          <Image src={image_url} width="100%" alt=""></Image>
+        </Box>
         <Flex direction="column" ml={['24px', '30px', null, null]}>
           <Text
             as="h2"
@@ -159,7 +173,11 @@ export default function DisplayData({
         </Flex>
         <Flex align="center">
           <Icon
-            as={TbBrandGoogleAnalytics}
+            as={
+              Level === 'Mid-Senior level'
+                ? SiGoogleanalytics
+                : TbBrandGoogleAnalytics
+            }
             w="25px"
             h="25px"
             color="#006333"
