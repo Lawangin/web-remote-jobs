@@ -210,7 +210,7 @@ export default function DataDetailPage({
               About The Job
             </Text>
             <Text fontSize="16px" color="#2F2E41" width="95%" mt="15px" mb="0">
-              {Description}
+              {splitLines(Description)}
             </Text>
           </Flex>
           <Flex direction="column" mt="30px">
