@@ -30,16 +30,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Semantic Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' # run only on merge to main
+      - name: Calculate new release version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: cycjimmy/semantic-release-action@v3
         id: semantic
         with:
           semantic_version: 19.0.5
           branches: |
             ['main']
+          dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Store new release version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: echo "NEW_RELEASE_VERSION=${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_ENV
 
       - name: Print semantic version
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -52,6 +57,19 @@ jobs:
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           # check to see if pushing to main, apply semmantic version, else apply sha version
           tags: ${{ github.event_name == 'pull_request' && format('lawanginkhan/remote-jobs-nextjs-app:{0}', github.sha) || format('lawanginkhan/remote-jobs-nextjs-app:{0}', steps.semantic.outputs.new_release_version) }}
+
+      - name: Create new release
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases \
+            -d '{
+              "tag_name": "v${{ env.NEW_RELEASE_VERSION }}",
+              "name": "v${{ env.NEW_RELEASE_VERSION }}",
+              "body": "Release v${{ env.NEW_RELEASE_VERSION }}"
+            }'
 
       - name: Save version to file
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
