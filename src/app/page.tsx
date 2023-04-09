@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Text } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 import Category from './components/category';
 import TopBar from './components/TopBar';
 import DisplayData from './components/DisplayData';
@@ -10,6 +10,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [dashboard, setDashboard] = useState([]);
   const [filterData, setFilterData] = useState([]);
+  const [bgColor, setBgColor] = useState(false);
 
   useEffect(() => {
     async function fetchDashboard() {
@@ -22,6 +23,10 @@ export default function Home() {
 
     fetchDashboard();
   }, []);
+
+  function handleBgColor() {
+    setBgColor(!bgColor);
+  }
 
   interface mydata {
     id: string;
@@ -36,6 +41,7 @@ export default function Home() {
     Function: string;
     Industry: string;
     Link: string;
+    image_url: string;
   }
 
   function handleFilterData(filterTerm: string, e: any): void {
@@ -54,14 +60,20 @@ export default function Home() {
         Title={data.Title}
         Company={data.Company}
         Description={data.Description}
+        Location={data.Location}
         Salary={data.Salary}
         Level={data.Level}
+        Type={data.Type}
+        Industry={data.Industry}
+        Function={data.Function}
         URL={data.Link}
+        image_url={data.image_url}
+        handleBgColor={handleBgColor}
       />
     ));
 
   return (
-    <>
+    <Box>
       <TopBar />
       {filterData && (
         <Category
@@ -76,6 +88,6 @@ export default function Home() {
       ) : (
         dashboardList
       )}
-    </>
+    </Box>
   );
 }
