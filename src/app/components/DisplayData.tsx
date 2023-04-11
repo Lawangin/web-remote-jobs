@@ -1,11 +1,4 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Icon,
-  Image,
-  Link as NextLink,
-} from '@chakra-ui/react';
+import { Box, Text, Flex, Icon, Image, Link } from '@chakra-ui/react';
 
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
@@ -15,7 +8,8 @@ import DataDetailPage from './DataDetailPage';
 import styled from 'styled-components';
 
 const Btn = styled.button`
-  padding: 11px 28px;
+  width: 20%;
+  padding: 10px 0;
   text-align: center;
   color: #fff;
   background-color: #00ba61;
@@ -72,6 +66,8 @@ export default function DisplayData({
       border="1px solid #E1E1E1"
       borderRadius="20px"
       backgroundColor="#fff"
+      cursor="pointer"
+      onClick={handlePopUpState}
     >
       {popUpState && (
         <DataDetailPage
@@ -107,8 +103,6 @@ export default function DisplayData({
             fontSize={['18px', '24px', null, null]}
             fontWeight="700"
             width={['100%', null]}
-            cursor="pointer"
-            onClick={handlePopUpState}
           >
             {Title}
           </Text>
@@ -193,10 +187,15 @@ export default function DisplayData({
             {Level}
           </Text>
         </Flex>
-        <Btn>
-          <NextLink href={URL} isExternal>
+        <Btn onClick={e => e.stopPropagation()}>
+          <Link
+            href={URL}
+            display="block"
+            _hover={{ textDecoration: 'none' }}
+            isExternal
+          >
             Apply Now
-          </NextLink>
+          </Link>
         </Btn>
       </Flex>
     </Box>

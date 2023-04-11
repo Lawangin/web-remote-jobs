@@ -238,7 +238,12 @@ export default function DataDetailPage({
             </Text>
           </Flex>
           <Btn>
-            <Link href={URL} isExternal>
+            <Link
+              href={URL}
+              display="block"
+              _hover={{ textDecoration: 'none' }}
+              isExternal
+            >
               Apply Now
             </Link>
           </Btn>
