@@ -3,7 +3,9 @@ import pool from '../../../lib/db';
 // eslint-disable-next-line no-unused-vars
 export async function GET(req: Request) {
   try {
-    const { rows } = await pool.query('SELECT * FROM temp_jobs');
+    const { rows } = await pool.query(
+      'SELECT * FROM temp_jobs ORDER BY "Date" DESC'
+    );
     return new Response(JSON.stringify(rows), {
       status: 200,
       headers: {
