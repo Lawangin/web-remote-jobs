@@ -1,60 +1,45 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Text, Box } from '@chakra-ui/react';
+import { IData } from '@/types/api';
+import { Box, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import Category from './components/category';
-import TopBar from './components/TopBar';
 import DisplayData from './components/DisplayData';
+import TopBar from './components/TopBar';
+import { useFetchDashboard } from './hooks/useFetchDashboard';
+import { useInfiniteScroll } from './hooks/useInfiniteScroll';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [dashboard, setDashboard] = useState([]);
-  const [filterData, setFilterData] = useState([]);
-  const [bgColor, setBgColor] = useState(false);
+  const { count, dashboard, filterData, fetchDashboard, handleFilterData } =
+    useFetchDashboard();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bgColor, setBgColor] = useState<boolean>(false);
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchDashboard() {
-      const response = await fetch('/api/data');
-      const data = await response.json();
-      setDashboard(data);
-      setFilterData(data);
+    (async () => {
+      setLoading(true);
+      await fetchDashboard(currentPage);
       setLoading(false);
-    }
-
-    fetchDashboard();
+      setFirstLoad(false); // Update firstLoad to false after the initial data fetch
+    })();
   }, []);
+
+  const { loadMoreRef, loadingMore } = useInfiniteScroll(() => {
+    setCurrentPage(prevPage => {
+      fetchDashboard(prevPage + 1);
+      return prevPage + 1;
+    });
+  }, firstLoad);
 
   function handleBgColor() {
     setBgColor(!bgColor);
   }
 
-  interface mydata {
-    id: string;
-    Date: string;
-    Company: string;
-    Title: string;
-    Location: string;
-    Salary: number;
-    Description: string;
-    Level: string;
-    Type: string;
-    Function: string;
-    Industry: string;
-    Link: string;
-    image_url: string;
-  }
-
-  function handleFilterData(filterTerm: string, e: any): void {
-    e.preventDefault();
-    const newData = dashboard.filter((data: mydata) =>
-      data.Title.toLowerCase().includes(filterTerm.toLowerCase())
-    );
-    setFilterData(newData);
-  }
-
   const dashboardList =
     filterData &&
-    filterData.map((data: mydata, ind: number) => (
+    filterData.map((data: IData, ind: number) => (
       <DisplayData
         key={ind}
         Title={data.Title}
@@ -75,11 +60,8 @@ export default function Home() {
   return (
     <Box>
       <TopBar />
-      {filterData && (
-        <Category
-          count={filterData.length}
-          handleFilterData={handleFilterData}
-        />
+      {dashboard && (
+        <Category count={count} handleFilterData={handleFilterData} />
       )}
       {loading ? (
         <Text textAlign="center" mt="20px" fontSize="20px">
@@ -88,6 +70,12 @@ export default function Home() {
       ) : (
         dashboardList
       )}
+      {loadingMore && (
+        <Text textAlign="center" mt="20px" fontSize="20px">
+          Loading more...
+        </Text>
+      )}
+      <div ref={loadMoreRef} />
     </Box>
   );
 }

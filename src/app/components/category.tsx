@@ -107,8 +107,7 @@ export default function Category(props: myprops) {
             props.handleFilterData(st, e);
           }}
         >
-          {' '}
-          FrontEnd Eng{' '}
+          FrontEnd Eng
         </Btn>
         <Btn
           selected={selectedBtn.fourthBtn}
