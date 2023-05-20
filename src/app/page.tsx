@@ -1,6 +1,6 @@
 'use client';
 
-import { IData } from '@/types/api';
+import { IData } from '../types/api';
 import { Box, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import Category from './components/category';
