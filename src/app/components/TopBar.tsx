@@ -1,7 +1,6 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import AboutUs from './AboutUs';
 import styled from 'styled-components';
 
 const Btn = styled.button`
@@ -15,6 +14,7 @@ const Btn = styled.button`
 `;
 
 interface myprops {
+  // eslint-disable-next-line no-unused-vars
   handleAboutUsPage: (bool1?: boolean) => void;
 }
 export default function TopBar(props: myprops) {
