@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Category from './components/category';
 import DisplayData from './components/DisplayData';
 import TopBar from './components/TopBar';
+import AboutUs from './components/AboutUs';
 import { useFetchDashboard } from './hooks/useFetchDashboard';
 import { useInfiniteScroll } from './hooks/useInfiniteScroll';
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [bgColor, setBgColor] = useState<boolean>(false);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [aboutUsPage, setAboutUsPage] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -37,8 +39,13 @@ export default function Home() {
     setBgColor(!bgColor);
   }
 
+  function handleAboutUsPage(bool1?: boolean): void {
+    bool1 == false ? setAboutUsPage(bool1) : setAboutUsPage(true);
+    console.log('About Us bool1: ', aboutUsPage);
+  }
   const dashboardList =
     filterData &&
+    !aboutUsPage &&
     filterData.map((data: IData, ind: number) => (
       <DisplayData
         key={ind}
@@ -59,11 +66,14 @@ export default function Home() {
 
   return (
     <Box>
-      <TopBar />
-      {dashboard && (
+      <TopBar handleAboutUsPage={handleAboutUsPage} />
+      {aboutUsPage && <AboutUs />}
+      {dashboard.length > 0 && aboutUsPage == false ? (
         <Category count={count} handleFilterData={handleFilterData} />
+      ) : (
+        ''
       )}
-      {loading ? (
+      {aboutUsPage == true && loading ? (
         <Text textAlign="center" mt="20px" fontSize="20px">
           Loading...
         </Text>
