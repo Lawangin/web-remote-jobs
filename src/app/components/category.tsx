@@ -73,7 +73,7 @@ export default function Category(props: myprops) {
             placeholder="Search Job Title"
             fontSize="12px"
             fontWeight="700"
-            color="#d9d9d9"
+            color="#000"
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
           />
