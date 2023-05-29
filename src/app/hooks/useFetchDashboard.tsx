@@ -21,14 +21,20 @@ export const useFetchDashboard = (): UseFetchDashboardResult => {
     });
   }
 
-  async function handleFilterData(filterTerm: string, e: MouseEvent) {
-    e.preventDefault();
+  async function handleFilterData(filterTerm: string, page: number) {
     const response = await fetch(
-      `/api/data/filter?search=${filterTerm}&page=1&pageSize=10`
+      `/api/data/filter?search=${filterTerm}&page=${page}&pageSize=10`
     );
     const newData = await response.json();
-    setFilterData(newData.data);
-    setCount(Number(newData.pagination.totalItems));
+    setFilterData(prevState => {
+      let updatedState;
+      page === 1
+        ? (updatedState = [newData.data])
+        : (updatedState = [...prevState, ...newData.data]);
+      // const updatedState = [...prevState, ...newData.data];
+      setCount(Number(newData.pagination.totalItems));
+      return updatedState;
+    });
   }
 
   return {

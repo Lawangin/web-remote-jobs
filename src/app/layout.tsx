@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
 import './globals.css';
+import { DashboardProvider } from './context/DashboardContext';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head />
       <body>
         <CacheProvider>
-          <ChakraProvider>{children}</ChakraProvider>
+          <DashboardProvider>
+            <ChakraProvider>{children}</ChakraProvider>
+          </DashboardProvider>
         </CacheProvider>
       </body>
     </html>

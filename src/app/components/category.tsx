@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState, useContext, MouseEvent } from 'react';
 import {
   Text,
   Box,
@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
+import DashboardContext from '../context/DashboardContext';
 
 // interface styleProps {
 //   selected: boolean;
@@ -31,7 +32,7 @@ export const Btn = styled.button`
 interface myprops {
   count: number;
   // eslint-disable-next-line no-unused-vars
-  handleFilterData: (st: string, e: any) => void;
+  handleFilterData: (st: string, page: number) => void;
 }
 
 // interface mystate {
@@ -42,6 +43,16 @@ interface myprops {
 // }
 export default function Category(props: myprops) {
   const [searchText, setSearchText] = useState<string>('');
+  const { setSearchTerm } = useContext(DashboardContext);
+
+  useEffect(() => {
+    searchText.length > 1 ? setSearchTerm(searchText) : setSearchTerm('');
+  }, [searchText]);
+
+  function onSearchHandler(e: MouseEvent) {
+    e.preventDefault();
+    props.handleFilterData(searchText, 1);
+  }
 
   return (
     <Box
@@ -78,14 +89,7 @@ export default function Category(props: myprops) {
             onChange={e => setSearchText(e.target.value)}
           />
           <InputRightElement width="100px">
-            <Btn
-              onClick={e => {
-                props.handleFilterData(searchText, e);
-                setSearchText('');
-              }}
-            >
-              Find job
-            </Btn>
+            <Btn onClick={onSearchHandler}>Find job</Btn>
           </InputRightElement>
         </InputGroup>
       </Box>

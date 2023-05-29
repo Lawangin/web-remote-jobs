@@ -22,7 +22,7 @@ export const useInfiniteScroll = (
       const options = {
         root: null, // Observe the entire viewport
         rootMargin: '0px', // No margin around the root
-        threshold: 0.7, // Trigger the callback when 100% of the target is visible
+        threshold: 0.7, // Trigger the callback when 70% of the target is visible
       };
 
       // Create a new IntersectionObserver with the provided options

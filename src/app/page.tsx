@@ -2,18 +2,21 @@
 
 import { IData } from '../types/api';
 import { Box, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Category from './components/category';
 import DisplayData from './components/DisplayData';
 import TopBar from './components/TopBar';
 import AboutUs from './components/AboutUs';
 import { useFetchDashboard } from './hooks/useFetchDashboard';
 import { useInfiniteScroll } from './hooks/useInfiniteScroll';
+import DashboardContext from './context/DashboardContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const { count, dashboard, filterData, fetchDashboard, handleFilterData } =
     useFetchDashboard();
+  const { searchTerm } = useContext(DashboardContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [bgColor, setBgColor] = useState<boolean>(false);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
@@ -30,7 +33,9 @@ export default function Home() {
 
   const { loadMoreRef, loadingMore } = useInfiniteScroll(() => {
     setCurrentPage(prevPage => {
-      fetchDashboard(prevPage + 1);
+      searchTerm.length > 2
+        ? handleFilterData(searchTerm, prevPage + 1)
+        : fetchDashboard(prevPage + 1);
       return prevPage + 1;
     });
   }, firstLoad);
