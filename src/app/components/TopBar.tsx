@@ -42,7 +42,7 @@ export default function TopBar(props: myprops) {
           color="#006333"
         />
         <Link href="/" ml="5px" onClick={() => props.handleAboutUsPage()}>
-          <Text fontSize="12px" fontWeight="700">
+          <Text fontSize="12px" fontWeight="700" color="black">
             Learn How It Works
           </Text>
         </Link>

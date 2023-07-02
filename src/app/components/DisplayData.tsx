@@ -11,12 +11,7 @@ import {
 
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
-// import { TbBrandGoogleAnalytics } from 'react-icons/tb';
-// import { SiGoogleanalytics } from 'react-icons/si';
-import { EmptyChartIcon } from './Icons/EmptyChartIcon';
-import { EntryChartIcon } from './Icons/EntryChartIcon';
-import { InterChartIcon } from './Icons/InterChartIcon';
-import { AdvChartIcon } from './Icons/AdvChartIcon';
+import { iconPicker } from '../helpers/iconPicker';
 import DataDetailPage from './DataDetailPage';
 
 type ChildComponentProps = {
@@ -55,19 +50,6 @@ export default function DisplayData({
   const handlePopUpState = () => {
     setPopState(!popUpState);
     handleBgColor();
-  };
-
-  const iconPicker = () => {
-    if (Level === 'Entry level') {
-      return EntryChartIcon;
-    }
-    if (Level === 'Mid-Senior level') {
-      return AdvChartIcon;
-    }
-    if (Level === 'Associate') {
-      return InterChartIcon;
-    }
-    return EmptyChartIcon;
   };
 
   return (
@@ -111,6 +93,7 @@ export default function DisplayData({
             fontSize={['18px', '24px', null, null]}
             fontWeight="700"
             width={['100%', null]}
+            color="black"
           >
             {Title}
           </Text>
@@ -161,7 +144,13 @@ export default function DisplayData({
           )}
         </Flex>
         <Flex align="center">
-          <Icon as={iconPicker()} w="25px" h="25px" color="#006333" mt="2px" />
+          <Icon
+            as={iconPicker(Level)}
+            w="25px"
+            h="25px"
+            color="#006333"
+            mt="2px"
+          />
           <Text
             fontSize={'14px'}
             fontWeight="700"

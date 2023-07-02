@@ -63,6 +63,7 @@ export default function Category(props: myprops) {
         textAlign={{ base: 'center', sm: 'left' }}
         fontSize={['28px', '32px', null, null]}
         fontWeight="700"
+        color="black"
       >
         Find your dream remote job
       </Text>
@@ -110,6 +111,7 @@ export default function Category(props: myprops) {
         fontSize="12px"
         fontWeight="700"
         backgroundColor="#F4F6FB"
+        color="chakra-body-text._dark"
       >
         {props.count} Jobs Found
       </Box>
