@@ -1,27 +1,12 @@
 'use client';
 
 import { Fragment } from 'react';
-import { Box, Flex, Text, Icon, Link, Image } from '@chakra-ui/react';
+import { Box, Flex, Text, Icon, Link, Image, Button } from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
-import styled from 'styled-components';
-
-const Btn = styled.button`
-  width: 95%;
-  height: 44px;
-  text-align: center;
-  color: #fff;
-  background-color: #00ba61;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 12px;
-  font-weight: 700;
-  margin-top: 100px;
-  margin-bottom: 20px;
-`;
 
 type ChildComponentProps = {
   key: number;
@@ -248,7 +233,13 @@ export default function DataDetailPage({
             _hover={{ textDecoration: 'none' }}
             isExternal
           >
-            <Btn>Apply Now</Btn>
+            <Button
+              onClick={e => e.stopPropagation()}
+              colorScheme="green"
+              width="100%"
+            >
+              Apply Now
+            </Button>
           </Link>
         </Box>
       </Box>

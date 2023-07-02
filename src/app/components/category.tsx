@@ -8,14 +8,11 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Button,
 } from '@chakra-ui/react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
 import DashboardContext from '../context/DashboardContext';
-
-// interface styleProps {
-//   selected: boolean;
-// }
 
 export const Btn = styled.button`
   padding: 5px 10px;
@@ -35,12 +32,6 @@ interface myprops {
   handleFilterData: (st: string, page: number) => void;
 }
 
-// interface mystate {
-//   firstBtn: boolean;
-//   secondBtn: boolean;
-//   thirdBtn: boolean;
-//   fourthBtn: boolean;
-// }
 export default function Category(props: myprops) {
   const [searchText, setSearchText] = useState<string>('');
   const { setSearchTerm } = useContext(DashboardContext);
@@ -58,7 +49,7 @@ export default function Category(props: myprops) {
     <Box
       p="5"
       mt="30px"
-      width={{ base: '90%', md: '85%', lg: '60%', xl: '55%' }}
+      width={{ base: '90%', md: '85%', lg: '70%', xl: '60%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"
@@ -95,7 +86,14 @@ export default function Category(props: myprops) {
               onChange={e => setSearchText(e.target.value)}
             />
             <InputRightElement width="100px">
-              <Btn onClick={onSearchHandler}>Find job</Btn>
+              <Button
+                onClick={onSearchHandler}
+                colorScheme="green"
+                width="95%"
+                height="90%"
+              >
+                Find job
+              </Button>
             </InputRightElement>
           </InputGroup>
         </form>

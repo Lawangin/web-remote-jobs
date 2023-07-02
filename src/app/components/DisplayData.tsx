@@ -11,22 +11,14 @@ import {
 
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
-import { TbBrandGoogleAnalytics } from 'react-icons/tb';
-import { SiGoogleanalytics } from 'react-icons/si';
+// import { TbBrandGoogleAnalytics } from 'react-icons/tb';
+// import { SiGoogleanalytics } from 'react-icons/si';
+import { EmptyChartIcon } from './Icons/EmptyChartIcon';
+import { EntryChartIcon } from './Icons/EntryChartIcon';
+import { InterChartIcon } from './Icons/InterChartIcon';
+import { AdvChartIcon } from './Icons/AdvChartIcon';
 import DataDetailPage from './DataDetailPage';
-// import styled from 'styled-components';
 
-// const Btn = styled.button`
-//   width: 20%;
-//   padding: 10px 0;
-//   text-align: center;
-//   color: #fff;
-//   background-color: #00ba61;
-//   border: 0;
-//   border-radius: 0.5rem;
-//   font-size: 12px;
-//   font-weight: 700;
-// `;
 type ChildComponentProps = {
   id: number;
   Title: string;
@@ -65,11 +57,24 @@ export default function DisplayData({
     handleBgColor();
   };
 
+  const iconPicker = () => {
+    if (Level === 'Entry level') {
+      return EntryChartIcon;
+    }
+    if (Level === 'Mid-Senior level') {
+      return AdvChartIcon;
+    }
+    if (Level === 'Associate') {
+      return InterChartIcon;
+    }
+    return EmptyChartIcon;
+  };
+
   return (
     <Box
       p="5"
       mt="30px"
-      width={{ base: '90%', md: '85%', lg: '60%', xl: '55%' }}
+      width={{ base: '90%', md: '85%', lg: '70%', xl: '60%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"
@@ -140,48 +145,25 @@ export default function DisplayData({
             as={AiOutlineDollar}
             w="25px"
             h="25px"
-            color="#006333"
+            color={Salary !== null ? '#006333' : 'grey'}
             mt="2px"
           />
           {Salary !== null ? (
             <>
-              <Text
-                fontSize={['18px', '13px', '18px']}
-                fontWeight="700"
-                ml="5px"
-                width="100%"
-              >
+              <Text fontSize={'14px'} fontWeight="700" ml="5px" width="100%">
                 {Salary}
-              </Text>
-              <Text fontSize="16px" color="#939598" ml="3px" mt="2px">
-                /Year
               </Text>
             </>
           ) : (
-            <Text
-              fontSize={['18px', '13px', '18px']}
-              fontWeight="700"
-              color="#939598"
-              ml="5px"
-            >
-              Not Available
+            <Text fontSize={'14px'} fontWeight="700" color="#939598" ml="5px">
+              -
             </Text>
           )}
         </Flex>
         <Flex align="center">
-          <Icon
-            as={
-              Level === 'Mid-Senior level'
-                ? SiGoogleanalytics
-                : TbBrandGoogleAnalytics
-            }
-            w="25px"
-            h="25px"
-            color="#006333"
-            mt="2px"
-          />
+          <Icon as={iconPicker()} w="25px" h="25px" color="#006333" mt="2px" />
           <Text
-            fontSize={['18px', '13px', '18px']}
+            fontSize={'14px'}
             fontWeight="700"
             color="#939598"
             ml="5px"
