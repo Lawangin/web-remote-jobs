@@ -1,18 +1,30 @@
 'use client';
-import { useState } from 'react';
-import { Flex, Text, Box } from '@chakra-ui/react';
+import { useEffect, useState, useContext, MouseEvent } from 'react';
+import {
+  Text,
+  Box,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+} from '@chakra-ui/react';
+import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
+import DashboardContext from '../context/DashboardContext';
 
-interface styleProps {
-  selected: boolean;
-}
+// interface styleProps {
+//   selected: boolean;
+// }
 
-export const Btn = styled.button<styleProps>`
-  padding: 12px 25px;
+export const Btn = styled.button`
+  padding: 5px 10px;
+  width: 92px;
+  height: 34px;
   text-align: center;
-  background-color: ${props => (props.selected ? '#00ba61' : '#f4f6fb')};
+  background-color: #00ba61;
   border: 0;
-  color: ${props => (props.selected ? '#ffffff' : '#000000')};
+  color: #fff;
   border-radius: 0.5rem;
   font-size: 12px;
   font-weight: 700;
@@ -20,22 +32,29 @@ export const Btn = styled.button<styleProps>`
 interface myprops {
   count: number;
   // eslint-disable-next-line no-unused-vars
-  handleFilterData: (st: string, e: any) => void;
+  handleFilterData: (st: string, page: number) => void;
 }
 
-interface mystate {
-  firstBtn: boolean;
-  secondBtn: boolean;
-  thirdBtn: boolean;
-  fourthBtn: boolean;
-}
+// interface mystate {
+//   firstBtn: boolean;
+//   secondBtn: boolean;
+//   thirdBtn: boolean;
+//   fourthBtn: boolean;
+// }
 export default function Category(props: myprops) {
-  const [selectedBtn, setSelected] = useState<mystate>({
-    firstBtn: true,
-    secondBtn: false,
-    thirdBtn: false,
-    fourthBtn: false,
-  });
+  const [searchText, setSearchText] = useState<string>('');
+  const { setSearchTerm } = useContext(DashboardContext);
+
+  useEffect(() => {
+    console.log(searchText);
+    searchText.length > 1 ? setSearchTerm(searchText) : setSearchTerm('');
+  }, [searchText]);
+
+  function onSearchHandler(e: MouseEvent) {
+    e.preventDefault();
+    props.handleFilterData(searchText, 1);
+  }
+
   return (
     <Box
       p="5"
@@ -55,76 +74,26 @@ export default function Category(props: myprops) {
         fontSize={['28px', '32px', null, null]}
         fontWeight="700"
       >
-        Choose a Category
+        Find your dream remote job
       </Text>
-      <Flex
-        maxW="91%"
-        mx="auto"
-        flexDirection={{ base: 'column', sm: 'row' }}
-        justify="space-between"
-        rowGap="4"
-      >
-        <Btn
-          selected={selectedBtn.firstBtn}
-          onClick={e => {
-            const st = ' ';
-            setSelected({
-              firstBtn: true,
-              secondBtn: false,
-              thirdBtn: false,
-              fourthBtn: false,
-            });
-            props.handleFilterData(st, e);
-          }}
-        >
-          All Categories
-        </Btn>
-        <Btn
-          selected={selectedBtn.secondBtn}
-          onClick={e => {
-            const st = 'software';
-            setSelected({
-              firstBtn: false,
-              secondBtn: true,
-              thirdBtn: false,
-              fourthBtn: false,
-            });
-            props.handleFilterData(st, e);
-          }}
-        >
-          Software Eng
-        </Btn>
-        <Btn
-          selected={selectedBtn.thirdBtn}
-          onClick={e => {
-            const st = 'front';
-            setSelected({
-              firstBtn: false,
-              secondBtn: false,
-              thirdBtn: true,
-              fourthBtn: false,
-            });
-            props.handleFilterData(st, e);
-          }}
-        >
-          FrontEnd Eng
-        </Btn>
-        <Btn
-          selected={selectedBtn.fourthBtn}
-          onClick={e => {
-            const st = 'data analyst';
-            setSelected({
-              firstBtn: false,
-              secondBtn: false,
-              thirdBtn: false,
-              fourthBtn: true,
-            });
-            props.handleFilterData(st, e);
-          }}
-        >
-          Data Analyst
-        </Btn>
-      </Flex>
+      <Box py="3" maxW="91%" mx="auto">
+        <InputGroup>
+          <InputLeftElement pointerEvents="none">
+            <Icon as={AiOutlineSearch} w="20px" h="17px" color="#d9d9d9"></Icon>
+          </InputLeftElement>
+          <Input
+            placeholder="Search Job Title"
+            fontSize="12px"
+            fontWeight="700"
+            color="#000"
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+          />
+          <InputRightElement width="100px">
+            <Btn onClick={onSearchHandler}>Find job</Btn>
+          </InputRightElement>
+        </InputGroup>
+      </Box>
       <Box
         py="3"
         my="4"

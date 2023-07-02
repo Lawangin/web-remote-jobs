@@ -1,44 +1,59 @@
 'use client';
 
-import { IData } from '@/types/api';
+import { IData } from '../types/api';
 import { Box, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Category from './components/category';
 import DisplayData from './components/DisplayData';
 import TopBar from './components/TopBar';
+import AboutUs from './components/AboutUs';
 import { useFetchDashboard } from './hooks/useFetchDashboard';
 import { useInfiniteScroll } from './hooks/useInfiniteScroll';
+import DashboardContext from './context/DashboardContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const { count, dashboard, filterData, fetchDashboard, handleFilterData } =
-    useFetchDashboard();
+  const { count, filterData, handleFilterData } = useFetchDashboard();
+  const { searchTerm } = useContext(DashboardContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [bgColor, setBgColor] = useState<boolean>(false);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [aboutUsPage, setAboutUsPage] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       setLoading(true);
-      await fetchDashboard(currentPage);
+      await handleFilterData('', currentPage);
       setLoading(false);
       setFirstLoad(false); // Update firstLoad to false after the initial data fetch
     })();
   }, []);
 
-  const { loadMoreRef, loadingMore } = useInfiniteScroll(() => {
-    setCurrentPage(prevPage => {
-      fetchDashboard(prevPage + 1);
-      return prevPage + 1;
-    });
-  }, firstLoad);
+  const { loadMoreRef, loadingMore } = useInfiniteScroll(
+    searchTerm,
+    () => {
+      setCurrentPage(prevPage => {
+        searchTerm.length > 2
+          ? handleFilterData(searchTerm, prevPage + 1)
+          : handleFilterData('', prevPage + 1);
+        return prevPage + 1;
+      });
+    },
+    firstLoad
+  );
 
   function handleBgColor() {
     setBgColor(!bgColor);
   }
 
+  function handleAboutUsPage(bool1?: boolean): void {
+    bool1 == false ? setAboutUsPage(bool1) : setAboutUsPage(true);
+    console.log('About Us bool1: ', aboutUsPage);
+  }
   const dashboardList =
-    filterData &&
+    filterData.length > 1 &&
+    !aboutUsPage &&
     filterData.map((data: IData, ind: number) => (
       <DisplayData
         key={ind}
@@ -59,11 +74,14 @@ export default function Home() {
 
   return (
     <Box>
-      <TopBar />
-      {dashboard && (
+      <TopBar handleAboutUsPage={handleAboutUsPage} />
+      {aboutUsPage && <AboutUs />}
+      {filterData.length > 0 && aboutUsPage == false ? (
         <Category count={count} handleFilterData={handleFilterData} />
+      ) : (
+        ''
       )}
-      {loading ? (
+      {aboutUsPage == true && loading ? (
         <Text textAlign="center" mt="20px" fontSize="20px">
           Loading...
         </Text>
