@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useContext, MouseEvent } from 'react';
+import { useEffect, useState, useContext, FormEvent } from 'react';
 import {
   Text,
   Box,
@@ -46,11 +46,10 @@ export default function Category(props: myprops) {
   const { setSearchTerm } = useContext(DashboardContext);
 
   useEffect(() => {
-    console.log(searchText);
     searchText.length > 1 ? setSearchTerm(searchText) : setSearchTerm('');
   }, [searchText]);
 
-  function onSearchHandler(e: MouseEvent) {
+  function onSearchHandler(e: FormEvent) {
     e.preventDefault();
     props.handleFilterData(searchText, 1);
   }
@@ -77,22 +76,29 @@ export default function Category(props: myprops) {
         Find your dream remote job
       </Text>
       <Box py="3" maxW="91%" mx="auto">
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <Icon as={AiOutlineSearch} w="20px" h="17px" color="#d9d9d9"></Icon>
-          </InputLeftElement>
-          <Input
-            placeholder="Search Job Title"
-            fontSize="12px"
-            fontWeight="700"
-            color="#000"
-            value={searchText}
-            onChange={e => setSearchText(e.target.value)}
-          />
-          <InputRightElement width="100px">
-            <Btn onClick={onSearchHandler}>Find job</Btn>
-          </InputRightElement>
-        </InputGroup>
+        <form onSubmit={onSearchHandler}>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">
+              <Icon
+                as={AiOutlineSearch}
+                w="20px"
+                h="17px"
+                color="#d9d9d9"
+              ></Icon>
+            </InputLeftElement>
+            <Input
+              placeholder="Search Job Title"
+              fontSize="12px"
+              fontWeight="700"
+              color="#000"
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+            />
+            <InputRightElement width="100px">
+              <Btn onClick={onSearchHandler}>Find job</Btn>
+            </InputRightElement>
+          </InputGroup>
+        </form>
       </Box>
       <Box
         py="3"
