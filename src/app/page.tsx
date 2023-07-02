@@ -1,7 +1,7 @@
 'use client';
 
 import { IData } from '../types/api';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Center, Text } from '@chakra-ui/react';
 import { useEffect, useState, useContext } from 'react';
 import Category from './components/category';
 import DisplayData from './components/DisplayData';
@@ -49,44 +49,56 @@ export default function Home() {
 
   function handleAboutUsPage(bool1?: boolean): void {
     bool1 == false ? setAboutUsPage(bool1) : setAboutUsPage(true);
-    console.log('About Us bool1: ', aboutUsPage);
   }
-  const dashboardList =
-    filterData.length > 1 &&
-    !aboutUsPage &&
-    filterData.map((data: IData, ind: number) => (
-      <DisplayData
-        key={ind}
-        Title={data.Title}
-        Company={data.Company}
-        Description={data.Description}
-        Location={data.Location}
-        Salary={data.Salary}
-        Level={data.Level}
-        Type={data.Type}
-        Industry={data.Industry}
-        Function={data.Function}
-        URL={data.Link}
-        image_url={data.image_url}
-        handleBgColor={handleBgColor}
-      />
-    ));
+  const dashboardList = () => {
+    if (filterData.length === 0) {
+      return (
+        <Center p="4">
+          <Text fontSize="2xl">No Results Found!</Text>
+        </Center>
+      );
+    } else {
+      return (
+        filterData.length > 1 &&
+        !aboutUsPage &&
+        filterData.map((data: IData, ind: number) => (
+          // eslint-disable-next-line react/jsx-key
+          <DisplayData
+            key={ind}
+            id={ind}
+            Title={data.Title}
+            Company={data.Company}
+            Description={data.Description}
+            Location={data.Location}
+            Salary={data.Salary}
+            Level={data.Level}
+            Type={data.Type}
+            Industry={data.Industry}
+            Function={data.Function}
+            URL={data.Link}
+            image_url={data.image_url}
+            handleBgColor={handleBgColor}
+          />
+        ))
+      );
+    }
+  };
 
   return (
     <Box>
       <TopBar handleAboutUsPage={handleAboutUsPage} />
       {aboutUsPage && <AboutUs />}
-      {filterData.length > 0 && aboutUsPage == false ? (
+      {filterData.length >= 0 && aboutUsPage == false ? (
         <Category count={count} handleFilterData={handleFilterData} />
       ) : (
         ''
       )}
-      {aboutUsPage == true && loading ? (
+      {loading ? (
         <Text textAlign="center" mt="20px" fontSize="20px">
           Loading...
         </Text>
       ) : (
-        dashboardList
+        dashboardList()
       )}
       {loadingMore && (
         <Text textAlign="center" mt="20px" fontSize="20px">

@@ -19,7 +19,7 @@ const Btn = styled.button`
   font-weight: 700;
 `;
 type ChildComponentProps = {
-  key: number;
+  id: number;
   Title: string;
   Company: string;
   Description: string;
@@ -35,7 +35,7 @@ type ChildComponentProps = {
 };
 
 export default function DisplayData({
-  key,
+  id,
   Title,
   Company,
   Description,
@@ -71,7 +71,7 @@ export default function DisplayData({
     >
       {popUpState && (
         <DataDetailPage
-          key={key}
+          key={id}
           Title={Title}
           Company={Company}
           Location={Location}
