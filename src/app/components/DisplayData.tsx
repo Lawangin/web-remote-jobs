@@ -1,23 +1,32 @@
-import { Box, Text, Flex, Icon, Image, Link } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Flex,
+  Icon,
+  Image,
+  Link,
+  Button,
+  Center,
+} from '@chakra-ui/react';
 
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
 import { SiGoogleanalytics } from 'react-icons/si';
 import DataDetailPage from './DataDetailPage';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const Btn = styled.button`
-  width: 20%;
-  padding: 10px 0;
-  text-align: center;
-  color: #fff;
-  background-color: #00ba61;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 12px;
-  font-weight: 700;
-`;
+// const Btn = styled.button`
+//   width: 20%;
+//   padding: 10px 0;
+//   text-align: center;
+//   color: #fff;
+//   background-color: #00ba61;
+//   border: 0;
+//   border-radius: 0.5rem;
+//   font-size: 12px;
+//   font-weight: 700;
+// `;
 type ChildComponentProps = {
   id: number;
   Title: string;
@@ -88,15 +97,9 @@ export default function DisplayData({
       )}
 
       <Flex align="center" maxW="91%" mx="auto">
-        <Box
-          w="60px"
-          h="60px"
-          backgroundColor="#d9d9d9"
-          borderRadius="5px"
-          mt="5px"
-        >
+        <Center w="60px" h="60px" borderRadius="5px" mt="5px">
           <Image src={image_url} width="100%" alt=""></Image>
-        </Box>
+        </Center>
         <Flex direction="column" ml={['24px', '30px', null, null]}>
           <Text
             as="h2"
@@ -187,16 +190,20 @@ export default function DisplayData({
             {Level}
           </Text>
         </Flex>
-        <Btn onClick={e => e.stopPropagation()}>
-          <Link
-            href={URL}
-            display="block"
-            _hover={{ textDecoration: 'none' }}
-            isExternal
+        <Link
+          href={URL}
+          _hover={{ textDecoration: 'none' }}
+          isExternal
+          width={['100%', '20%']}
+        >
+          <Button
+            onClick={e => e.stopPropagation()}
+            colorScheme="green"
+            width="100%"
           >
             Apply Now
-          </Link>
-        </Btn>
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );

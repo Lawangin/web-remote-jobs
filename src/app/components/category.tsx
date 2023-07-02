@@ -58,7 +58,7 @@ export default function Category(props: myprops) {
     <Box
       p="5"
       mt="30px"
-      width={{ base: '90%', md: '85%', lg: '55%' }}
+      width={{ base: '90%', md: '85%', lg: '60%', xl: '55%' }}
       maxW="798px"
       mx="auto"
       border="1px solid #E1E1E1"

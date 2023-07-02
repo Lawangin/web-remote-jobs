@@ -105,7 +105,7 @@ export default function DataDetailPage({
       onClick={handlePopUpState}
     >
       <Box
-        maxW="60%"
+        maxW={['100%', '60%']}
         marginLeft="auto"
         position="relative"
         backgroundColor="#fff"
@@ -150,7 +150,11 @@ export default function DataDetailPage({
               </Flex>
             </Flex>
           </Flex>
-          <Flex align="center" mt="30px">
+          <Flex
+            align={['left', 'center']}
+            mt="30px"
+            flexDirection={['column', 'row']}
+          >
             <Flex align="center">
               <Icon as={AiOutlineDollar} w="25px" h="25px" color="#006333" />
               <>
@@ -180,7 +184,7 @@ export default function DataDetailPage({
                 )}
               </>
             </Flex>
-            <Flex ml="60px">
+            <Flex ml={['0px', '60px']} align={['left', 'center']}>
               <Icon
                 as={
                   Level === 'Mid-Senior level'
