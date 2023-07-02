@@ -111,7 +111,7 @@ export default function Category(props: myprops) {
         fontSize="12px"
         fontWeight="700"
         backgroundColor="#F4F6FB"
-        color="chakra-body-text._dark"
+        color="black"
       >
         {props.count} Jobs Found
       </Box>
