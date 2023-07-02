@@ -46,6 +46,7 @@ export default function Category(props: myprops) {
   const { setSearchTerm } = useContext(DashboardContext);
 
   useEffect(() => {
+    console.log(searchText);
     searchText.length > 1 ? setSearchTerm(searchText) : setSearchTerm('');
   }, [searchText]);
 

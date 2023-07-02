@@ -11,7 +11,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     const offset = (page - 1) * pageSize;
 
     const { rows } = await pool.query(
-      `SELECT * FROM temp_jobs ORDER BY "Date" DESC LIMIT ${pageSize} OFFSET ${offset}`
+      `SELECT * FROM temp_jobs LIMIT ${pageSize} OFFSET ${offset}`
     );
 
     const totalRowsResult = await pool.query('SELECT COUNT(*) FROM temp_jobs');

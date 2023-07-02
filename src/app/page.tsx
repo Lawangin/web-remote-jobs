@@ -13,8 +13,7 @@ import DashboardContext from './context/DashboardContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const { count, dashboard, filterData, fetchDashboard, handleFilterData } =
-    useFetchDashboard();
+  const { count, filterData, handleFilterData } = useFetchDashboard();
   const { searchTerm } = useContext(DashboardContext);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,20 +24,24 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      await fetchDashboard(currentPage);
+      await handleFilterData('', currentPage);
       setLoading(false);
       setFirstLoad(false); // Update firstLoad to false after the initial data fetch
     })();
   }, []);
 
-  const { loadMoreRef, loadingMore } = useInfiniteScroll(() => {
-    setCurrentPage(prevPage => {
-      searchTerm.length > 2
-        ? handleFilterData(searchTerm, prevPage + 1)
-        : fetchDashboard(prevPage + 1);
-      return prevPage + 1;
-    });
-  }, firstLoad);
+  const { loadMoreRef, loadingMore } = useInfiniteScroll(
+    searchTerm,
+    () => {
+      setCurrentPage(prevPage => {
+        searchTerm.length > 2
+          ? handleFilterData(searchTerm, prevPage + 1)
+          : handleFilterData('', prevPage + 1);
+        return prevPage + 1;
+      });
+    },
+    firstLoad
+  );
 
   function handleBgColor() {
     setBgColor(!bgColor);
@@ -49,7 +52,7 @@ export default function Home() {
     console.log('About Us bool1: ', aboutUsPage);
   }
   const dashboardList =
-    filterData &&
+    filterData.length > 1 &&
     !aboutUsPage &&
     filterData.map((data: IData, ind: number) => (
       <DisplayData
@@ -73,7 +76,7 @@ export default function Home() {
     <Box>
       <TopBar handleAboutUsPage={handleAboutUsPage} />
       {aboutUsPage && <AboutUs />}
-      {dashboard.length > 0 && aboutUsPage == false ? (
+      {filterData.length > 0 && aboutUsPage == false ? (
         <Category count={count} handleFilterData={handleFilterData} />
       ) : (
         ''
