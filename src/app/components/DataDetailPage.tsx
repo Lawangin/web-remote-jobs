@@ -204,7 +204,7 @@ export default function DataDetailPage({
             <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Industry:
             </Text>
-            <Text fontSize="16px" mt="15px" mb="0">
+            <Text fontSize="16px" mt="15px" mb="0" color="black">
               {Industry}
             </Text>
           </Flex>
@@ -212,7 +212,7 @@ export default function DataDetailPage({
             <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Department:
             </Text>
-            <Text fontSize="16px" mt="15px" mb="0">
+            <Text fontSize="16px" mt="15px" mb="0" color="black">
               {Function}
             </Text>
           </Flex>
@@ -220,7 +220,7 @@ export default function DataDetailPage({
             <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Type:
             </Text>
-            <Text fontSize="16px" mt="15px" mb="0">
+            <Text fontSize="16px" mt="15px" mb="0" color="black">
               {Type}
             </Text>
           </Flex>
