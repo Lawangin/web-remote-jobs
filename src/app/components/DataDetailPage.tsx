@@ -5,8 +5,7 @@ import { Box, Flex, Text, Icon, Link, Image, Button } from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
 import { AiOutlineDollar } from 'react-icons/ai';
-import { SiGoogleanalytics } from 'react-icons/si';
-import { TbBrandGoogleAnalytics } from 'react-icons/tb';
+import { iconPicker } from '../helpers/iconPicker';
 
 type ChildComponentProps = {
   key: number;
@@ -112,6 +111,7 @@ export default function DataDetailPage({
                 fontSize={['18px', '24px', null, null]}
                 fontWeight="700"
                 width={['100%', null]}
+                color="black"
               >
                 {Title}
               </Text>
@@ -141,7 +141,12 @@ export default function DataDetailPage({
             flexDirection={['column', 'row']}
           >
             <Flex align="center">
-              <Icon as={AiOutlineDollar} w="25px" h="25px" color="#006333" />
+              <Icon
+                as={AiOutlineDollar}
+                w="25px"
+                h="25px"
+                color={Salary !== null ? '#006333' : 'grey'}
+              />
               <>
                 {Salary !== null ? (
                   <>
@@ -152,9 +157,6 @@ export default function DataDetailPage({
                       width="100%"
                     >
                       {Salary}
-                    </Text>
-                    <Text fontSize="16px" color="#939598" ml="3px" mt="2px">
-                      /Year
                     </Text>
                   </>
                 ) : (
@@ -171,11 +173,7 @@ export default function DataDetailPage({
             </Flex>
             <Flex ml={['0px', '60px']} align={['left', 'center']}>
               <Icon
-                as={
-                  Level === 'Mid-Senior level'
-                    ? SiGoogleanalytics
-                    : TbBrandGoogleAnalytics
-                }
+                as={iconPicker(Level)}
                 w="25px"
                 h="25px"
                 color="#006333"
@@ -195,7 +193,7 @@ export default function DataDetailPage({
             </Flex>
           </Flex>
           <Flex direction="column" mt="30px">
-            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               About The Job
             </Text>
             <Text fontSize="16px" color="#2F2E41" width="95%" mt="15px" mb="0">
@@ -203,7 +201,7 @@ export default function DataDetailPage({
             </Text>
           </Flex>
           <Flex direction="column" mt="30px">
-            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Industry:
             </Text>
             <Text fontSize="16px" mt="15px" mb="0">
@@ -211,15 +209,15 @@ export default function DataDetailPage({
             </Text>
           </Flex>
           <Flex direction="column" mt="20px">
-            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Department:
             </Text>
             <Text fontSize="16px" mt="15px" mb="0">
               {Function}
             </Text>
           </Flex>
-          <Flex direction="column" mt="20px">
-            <Text as="h3" fontSize="16px" fontWeight="700" my="0">
+          <Flex direction="column" mt="20px" pb={6}>
+            <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               Type:
             </Text>
             <Text fontSize="16px" mt="15px" mb="0">
