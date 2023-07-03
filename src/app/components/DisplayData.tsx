@@ -7,6 +7,7 @@ import {
   Link,
   Button,
   Center,
+  Grid,
 } from '@chakra-ui/react';
 
 import { AiOutlineDollar } from 'react-icons/ai';
@@ -114,7 +115,7 @@ export default function DisplayData({
           {Description}
         </Text>
       </Box>
-      <Flex
+      {/* <Flex
         justify="space-between"
         width="91%"
         maxW="91%"
@@ -122,8 +123,14 @@ export default function DisplayData({
         align={['center', null, null, null]}
         direction={['column', 'row']}
         rowGap="4"
+      > */}
+      <Grid
+        templateColumns={['repeat(1, 1fr)', '2fr 1fr 1fr']}
+        maxW="91%"
+        margin="auto"
+        gap={['4', '0']}
       >
-        <Flex align="center">
+        <Flex align="center" justifySelf="start">
           <Icon
             as={AiOutlineDollar}
             w="25px"
@@ -133,17 +140,23 @@ export default function DisplayData({
           />
           {Salary !== null ? (
             <>
-              <Text fontSize={'14px'} fontWeight="700" ml="5px" width="100%">
+              <Text
+                fontSize={'14px'}
+                fontWeight="700"
+                ml="5px"
+                width="100%"
+                color="black"
+              >
                 {Salary}
               </Text>
             </>
           ) : (
-            <Text fontSize={'14px'} fontWeight="700" color="#939598" ml="5px">
+            <Text fontSize={'14px'} fontWeight="700" color="black" ml="5px">
               -
             </Text>
           )}
         </Flex>
-        <Flex align="center">
+        <Flex align="center" justifySelf="start">
           <Icon
             as={iconPicker(Level)}
             w="25px"
@@ -154,28 +167,31 @@ export default function DisplayData({
           <Text
             fontSize={'14px'}
             fontWeight="700"
-            color="#939598"
+            color="black"
             ml="5px"
             mt="2px"
           >
             {Level}
           </Text>
         </Flex>
-        <Link
-          href={URL}
-          _hover={{ textDecoration: 'none' }}
-          isExternal
-          width={['100%', '20%']}
-        >
-          <Button
-            onClick={e => e.stopPropagation()}
-            colorScheme="green"
-            width="100%"
+        <Box justifySelf="end" width={['100%', 'auto']}>
+          <Link
+            href={URL}
+            _hover={{ textDecoration: 'none' }}
+            isExternal
+            width={['100%', '60%']}
           >
-            Apply Now
-          </Button>
-        </Link>
-      </Flex>
+            <Button
+              onClick={e => e.stopPropagation()}
+              colorScheme="green"
+              width="100%"
+            >
+              Apply Now
+            </Button>
+          </Link>
+        </Box>
+      </Grid>
+      {/* </Flex> */}
     </Box>
   );
 }
