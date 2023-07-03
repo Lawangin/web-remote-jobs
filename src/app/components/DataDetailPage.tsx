@@ -1,7 +1,16 @@
 'use client';
 
 import { Fragment } from 'react';
-import { Box, Flex, Text, Icon, Link, Image, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Text,
+  Icon,
+  Link,
+  Image,
+  Button,
+  Center,
+} from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
 import { AiOutlineDollar } from 'react-icons/ai';
@@ -89,6 +98,7 @@ export default function DataDetailPage({
       onClick={handlePopUpState}
     >
       <Box
+        onClick={e => e.stopPropagation()}
         maxW={['100%', '60%']}
         marginLeft="auto"
         position="relative"
@@ -101,9 +111,9 @@ export default function DataDetailPage({
       >
         <Box maxW="80%" margin="50px auto 20px auto">
           <Flex align="start">
-            <Box w="78px" h="78px" backgroundColor="#d9d9d9" borderRadius="5px">
+            <Center w="78px" h="78px" borderRadius="5px">
               <Image src={image_url} width="100%" alt=""></Image>
-            </Box>
+            </Center>
             <Flex direction="column" ml={['24px', '30px', null, null]}>
               <Text
                 as="h2"
@@ -239,6 +249,16 @@ export default function DataDetailPage({
               Apply Now
             </Button>
           </Link>
+          <Box py={6}>
+            <Button
+              onClick={handlePopUpState}
+              colorScheme="red"
+              width="100%"
+              variant="outline"
+            >
+              Go Back
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
