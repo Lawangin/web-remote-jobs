@@ -71,7 +71,7 @@ export default function Home() {
             Description={data.Description}
             Location={data.Location}
             Salary={data.Salary}
-            Level={data.Level}
+            Level={data.Level.trim()}
             Type={data.Type}
             Industry={data.Industry}
             Function={data.Function}
