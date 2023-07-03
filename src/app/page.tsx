@@ -22,6 +22,10 @@ export default function Home() {
   const [aboutUsPage, setAboutUsPage] = useState<boolean>(false);
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  useEffect(() => {
     (async () => {
       setLoading(true);
       await handleFilterData('', currentPage);
