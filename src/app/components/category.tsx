@@ -39,6 +39,7 @@ export default function Category(props: myprops) {
 
   useEffect(() => {
     searchText.length > 1 ? setSearchTerm(searchText) : setSearchTerm('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   function onSearchHandler(e: FormEvent) {
