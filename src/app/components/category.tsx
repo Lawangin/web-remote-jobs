@@ -1,15 +1,16 @@
 'use client';
-import { useEffect, useState, useContext, FormEvent } from 'react';
+import { event } from '@/lib/gtagHelper';
 import {
-  Text,
   Box,
+  Button,
   Icon,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Button,
+  Text,
 } from '@chakra-ui/react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
 import DashboardContext from '../context/DashboardContext';
@@ -43,6 +44,9 @@ export default function Category(props: myprops) {
   function onSearchHandler(e: FormEvent) {
     e.preventDefault();
     props.handleFilterData(searchText, 1);
+
+    // send the search term to Google Analytics
+    event('search', { search_term: searchText });
   }
 
   return (

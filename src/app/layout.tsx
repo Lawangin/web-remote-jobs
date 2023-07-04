@@ -1,23 +1,24 @@
 'use client';
 
-import { ReactNode } from 'react';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
-import './globals.css';
-import { DashboardProvider } from './context/DashboardContext';
+import { ReactNode } from 'react';
+import CookieBanner from './components/CookieBanner';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import { DashboardProvider } from './context/DashboardContext';
+import './globals.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <GoogleAnalytics GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
-      <head />
       <body>
-        <CacheProvider>
-          <DashboardProvider>
-            <ChakraProvider>{children}</ChakraProvider>
-          </DashboardProvider>
-        </CacheProvider>
+        <ChakraProvider>
+          <CacheProvider>
+            <DashboardProvider>{children}</DashboardProvider>
+          </CacheProvider>
+          <CookieBanner />
+        </ChakraProvider>
       </body>
     </html>
   );
