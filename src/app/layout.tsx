@@ -11,7 +11,7 @@ import './globals.css';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <GoogleAnalytics GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
+      <GoogleAnalytics GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_ID} />
       <body>
         <ChakraProvider>
           <CacheProvider>

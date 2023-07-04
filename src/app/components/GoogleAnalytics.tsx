@@ -4,14 +4,20 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-const GoogleAnalytics = ({ GA_TRACKING_ID }: { GA_TRACKING_ID: string }) => {
+const GoogleAnalytics = ({
+  GA_TRACKING_ID,
+}: {
+  GA_TRACKING_ID: string | undefined;
+}) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const url = pathname + searchParams.toString();
 
-    pageview(GA_TRACKING_ID, url);
+    if (GA_TRACKING_ID) {
+      pageview(GA_TRACKING_ID, url);
+    }
   }, [pathname, searchParams, GA_TRACKING_ID]);
 
   return (
