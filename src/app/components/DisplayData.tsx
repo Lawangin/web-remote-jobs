@@ -12,7 +12,7 @@ import {
 
 import { AiOutlineDollar } from 'react-icons/ai';
 import { useState } from 'react';
-import { iconPicker } from '../helpers/iconPicker';
+import { iconPicker } from '../../lib/iconPicker';
 import DataDetailPage from './DataDetailPage';
 
 type ChildComponentProps = {

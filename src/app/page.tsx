@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Center, Text } from '@chakra-ui/react';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { IData } from '../types/api';
 import AboutUs from './components/AboutUs';
@@ -28,24 +27,6 @@ export default function Home() {
   const [bgColor, setBgColor] = useState<boolean>(false);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [aboutUsPage, setAboutUsPage] = useState<boolean>(false);
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const url = `${pathname}?${searchParams}`;
-    if (process.env.NODE_ENV === 'production') {
-      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
-        page_path: url,
-      });
-    } else if (process.env.NODE_ENV === 'development') {
-      console.log('GA Event', {
-        eventType: 'config',
-        GA_ID: process.env.NEXT_PUBLIC_GA_ID,
-        page_path: url,
-      });
-    }
-  }, [pathname, searchParams]);
 
   useEffect(() => {
     setCurrentPage(1);

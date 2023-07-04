@@ -14,7 +14,7 @@ import {
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
 import { AiOutlineDollar } from 'react-icons/ai';
-import { iconPicker } from '../helpers/iconPicker';
+import { iconPicker } from '../../lib/iconPicker';
 
 type ChildComponentProps = {
   key: number;
