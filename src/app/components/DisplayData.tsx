@@ -9,27 +9,22 @@ import {
   Center,
   Grid,
 } from '@chakra-ui/react';
-
-import { AiOutlineDollar } from 'react-icons/ai';
+import { IData } from '@/types/api';
+import { MdBusinessCenter } from 'react-icons/md';
+import { BsPersonFillGear } from 'react-icons/bs';
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { useState } from 'react';
 import { iconPicker } from '../../lib/iconPicker';
 import DataDetailPage from './DataDetailPage';
+import { SkillPill } from './SkillPill';
+import splitStringToList from '@/lib/stringToListHelper';
 
-type ChildComponentProps = {
-  id: number;
-  Title: string;
-  Company: string;
-  Description: string;
-  Location: string;
-  Salary: number;
-  Level: string;
-  Type: string;
-  Function: string;
-  Industry: string;
+type IDataSubset = Omit<IData, 'Link'>;
+
+interface ChildComponentProps extends IDataSubset {
   URL: string;
-  image_url: string;
   handleBgColor: () => void;
-};
+}
 
 export default function DisplayData({
   id,
@@ -44,6 +39,7 @@ export default function DisplayData({
   Level,
   URL,
   image_url,
+  Skills,
   handleBgColor,
 }: ChildComponentProps) {
   const [popUpState, setPopState] = useState<boolean>(false);
@@ -52,6 +48,8 @@ export default function DisplayData({
     setPopState(!popUpState);
     handleBgColor();
   };
+
+  const skillsList = splitStringToList(Skills);
 
   return (
     <Box
@@ -80,6 +78,7 @@ export default function DisplayData({
           Level={Level}
           URL={URL}
           image_url={image_url}
+          Skills={Skills}
           handlePopUpState={handlePopUpState}
         />
       )}
@@ -115,24 +114,16 @@ export default function DisplayData({
           {Description}
         </Text>
       </Box>
-      {/* <Flex
-        justify="space-between"
-        width="91%"
-        maxW="91%"
-        mx="auto"
-        align={['center', null, null, null]}
-        direction={['column', 'row']}
-        rowGap="4"
-      > */}
       <Grid
-        templateColumns={['repeat(1, 1fr)', '2fr 1fr 1fr']}
+        templateColumns={['repeat(1, 1fr)', '1fr 1fr']}
+        templateRows={['repeat(4, 1fr)', 'repeat(2, 1fr)']}
         maxW="91%"
         margin="auto"
-        gap={['4', '0']}
+        gap={'4'}
       >
         <Flex align="center" justifySelf="start">
           <Icon
-            as={AiOutlineDollar}
+            as={RiMoneyDollarCircleFill}
             w="25px"
             h="25px"
             color={Salary !== null ? '#006333' : 'grey'}
@@ -157,13 +148,7 @@ export default function DisplayData({
           )}
         </Flex>
         <Flex align="center" justifySelf="start">
-          <Icon
-            as={iconPicker(Level)}
-            w="25px"
-            h="25px"
-            color="#006333"
-            mt="2px"
-          />
+          <Icon as={iconPicker(Level)} w="25px" h="25px" mt="2px" p="2px" />
           <Text
             fontSize={'14px'}
             fontWeight="700"
@@ -174,24 +159,61 @@ export default function DisplayData({
             {Level}
           </Text>
         </Flex>
-        <Box justifySelf="end" width={['100%', 'auto']}>
-          <Link
-            href={URL}
-            _hover={{ textDecoration: 'none' }}
-            isExternal
-            width={['100%', '60%']}
-          >
-            <Button
-              onClick={e => e.stopPropagation()}
-              colorScheme="green"
-              width="100%"
-            >
-              Apply Now
-            </Button>
-          </Link>
-        </Box>
+        <Flex align="center" justifySelf="start">
+          <Icon
+            as={MdBusinessCenter}
+            w="25px"
+            h="25px"
+            color={Type !== null ? '#006333' : 'grey'}
+            mt="2px"
+          />
+          {Type !== null ? (
+            <>
+              <Text
+                fontSize={'14px'}
+                fontWeight="700"
+                ml="5px"
+                width="100%"
+                color="black"
+              >
+                {Type}
+              </Text>
+            </>
+          ) : (
+            <Text fontSize={'14px'} fontWeight="700" color="black" ml="5px">
+              -
+            </Text>
+          )}
+        </Flex>
+        <Flex align="center" justifySelf="start">
+          <Icon
+            as={BsPersonFillGear}
+            w="25px"
+            h="25px"
+            color={Skills !== null ? '#006333' : 'grey'}
+            mt="2px"
+          />
+          <SkillPill skills={skillsList} shortVersion={true} />
+        </Flex>
       </Grid>
-      {/* </Flex> */}
+      <Box width={'100%'} maxW="91%" margin="auto" py={'4'}>
+        <Link
+          href={URL}
+          _hover={{ textDecoration: 'none' }}
+          display="flex"
+          justifyContent={'end'}
+          width={'100%'}
+          isExternal
+        >
+          <Button
+            onClick={e => e.stopPropagation()}
+            colorScheme="green"
+            width={['100%', 'auto']}
+          >
+            Apply Now
+          </Button>
+        </Link>
+      </Box>
     </Box>
   );
 }

@@ -10,27 +10,23 @@ import {
   Image,
   Button,
   Center,
+  Grid,
 } from '@chakra-ui/react';
 import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
-import { AiOutlineDollar } from 'react-icons/ai';
+import { BsPersonFillGear } from 'react-icons/bs';
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { iconPicker } from '../../lib/iconPicker';
+import { IData } from '@/types/api';
+import { SkillPill } from './SkillPill';
+import splitStringToList from '../../lib/stringToListHelper';
 
-type ChildComponentProps = {
-  key: number;
-  Title: string;
-  Company: string;
-  Description: string;
-  Location: string;
-  Salary: number;
-  Level: string;
-  Type: string;
-  Function: string;
-  Industry: string;
+type IDataSubset = Omit<IData, 'Link' | 'Date' | 'id'>;
+
+interface ChildComponentProps extends IDataSubset {
   URL: string;
-  image_url: string;
   handlePopUpState: () => void;
-};
+}
 
 export default function DataDetailPage({
   Title,
@@ -44,6 +40,7 @@ export default function DataDetailPage({
   Level,
   URL,
   image_url,
+  Skills,
   handlePopUpState,
 }: ChildComponentProps) {
   function splitLines(text: string) {
@@ -85,6 +82,8 @@ export default function DataDetailPage({
       }
     });
   }
+
+  const skillsList = Skills ? splitStringToList(Skills) : [''];
 
   return (
     <Box
@@ -145,14 +144,16 @@ export default function DataDetailPage({
               </Flex>
             </Flex>
           </Flex>
-          <Flex
-            align={['left', 'center']}
+          <Grid
+            templateColumns={['1fr', '1fr 1fr']}
+            templateRows={['repeat(3, 1fr)', '1fr']}
+            justifyContent={['left', 'center']}
             mt="30px"
-            flexDirection={['column', 'row']}
+            gap={'4'}
           >
             <Flex align="center">
               <Icon
-                as={AiOutlineDollar}
+                as={RiMoneyDollarCircleFill}
                 w="25px"
                 h="25px"
                 color={Salary !== null ? '#006333' : 'grey'}
@@ -181,7 +182,7 @@ export default function DataDetailPage({
                 )}
               </>
             </Flex>
-            <Flex ml={['0px', '60px']} align={['left', 'center']}>
+            <Flex align={['left', 'center']}>
               <Icon
                 as={iconPicker(Level)}
                 w="25px"
@@ -201,7 +202,23 @@ export default function DataDetailPage({
                 {Level}
               </Text>
             </Flex>
-          </Flex>
+            <Flex
+              align={['left', 'center']}
+              gridColumnStart={'1'}
+              gridColumnEnd={['1', '3']}
+            >
+              <Icon
+                as={BsPersonFillGear}
+                w="25px"
+                h="25px"
+                color={Skills !== null ? '#006333' : 'grey'}
+                fill="50%"
+                mt="2px"
+              />
+
+              <SkillPill skills={skillsList} />
+            </Flex>
+          </Grid>
           <Flex direction="column" mt="30px">
             <Text as="h3" fontSize="16px" fontWeight="700" my="0" color="black">
               About The Job

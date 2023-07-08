@@ -72,11 +72,11 @@ export default function Home() {
       return (
         filterData.length > 1 &&
         !aboutUsPage &&
-        filterData.map((data: IData, ind: number) => (
+        filterData.map((data: Omit<IData, 'Date'>, ind: number) => (
           // eslint-disable-next-line react/jsx-key
           <DisplayData
             key={ind}
-            id={ind}
+            id={data.id}
             Title={data.Title}
             Company={data.Company}
             Description={data.Description}
@@ -90,6 +90,7 @@ export default function Home() {
             Function={data.Function}
             URL={data.Link}
             image_url={data.image_url}
+            Skills={data.Skills}
             handleBgColor={handleBgColor}
           />
         ))
