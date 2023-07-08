@@ -16,6 +16,8 @@ import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { useState } from 'react';
 import { iconPicker } from '../../lib/iconPicker';
 import DataDetailPage from './DataDetailPage';
+import { SkillPill } from './SkillPill';
+import splitStringToList from '@/lib/stringToListHelper';
 
 type IDataSubset = Omit<IData, 'Link'>;
 
@@ -46,6 +48,8 @@ export default function DisplayData({
     setPopState(!popUpState);
     handleBgColor();
   };
+
+  const skillsList = splitStringToList(Skills);
 
   return (
     <Box
@@ -110,15 +114,6 @@ export default function DisplayData({
           {Description}
         </Text>
       </Box>
-      {/* <Flex
-        justify="space-between"
-        width="91%"
-        maxW="91%"
-        mx="auto"
-        align={['center', null, null, null]}
-        direction={['column', 'row']}
-        rowGap="4"
-      > */}
       <Grid
         templateColumns={['repeat(1, 1fr)', '1fr 1fr']}
         templateRows={['repeat(4, 1fr)', 'repeat(2, 1fr)']}
@@ -153,14 +148,7 @@ export default function DisplayData({
           )}
         </Flex>
         <Flex align="center" justifySelf="start">
-          <Icon
-            as={iconPicker(Level)}
-            w="25px"
-            h="25px"
-            color="#006333"
-            mt="2px"
-            p="2px"
-          />
+          <Icon as={iconPicker(Level)} w="25px" h="25px" mt="2px" p="2px" />
           <Text
             fontSize={'14px'}
             fontWeight="700"
@@ -176,7 +164,7 @@ export default function DisplayData({
             as={MdBusinessCenter}
             w="25px"
             h="25px"
-            color="#006333"
+            color={Type !== null ? '#006333' : 'grey'}
             mt="2px"
           />
           {Type !== null ? (
@@ -202,26 +190,10 @@ export default function DisplayData({
             as={BsPersonFillGear}
             w="25px"
             h="25px"
-            color="#006333"
+            color={Skills !== null ? '#006333' : 'grey'}
             mt="2px"
           />
-          {Skills !== null ? (
-            <>
-              <Text
-                fontSize={'14px'}
-                fontWeight="700"
-                ml="5px"
-                width="100%"
-                color="black"
-              >
-                {Skills}
-              </Text>
-            </>
-          ) : (
-            <Text fontSize={'14px'} fontWeight="700" color="black" ml="5px">
-              -
-            </Text>
-          )}
+          <SkillPill skills={skillsList} shortVersion={true} />
         </Flex>
       </Grid>
       <Box width={'100%'} maxW="91%" margin="auto" py={'4'}>
@@ -242,7 +214,6 @@ export default function DisplayData({
           </Button>
         </Link>
       </Box>
-      {/* </Flex> */}
     </Box>
   );
 }
