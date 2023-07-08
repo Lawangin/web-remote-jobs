@@ -15,22 +15,14 @@ import { MdLocationOn } from 'react-icons/md';
 import { RiBuildingFill } from 'react-icons/ri';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { iconPicker } from '../../lib/iconPicker';
+import { IData } from '@/types/api';
 
-type ChildComponentProps = {
-  key: number;
-  Title: string;
-  Company: string;
-  Description: string;
-  Location: string;
-  Salary: number;
-  Level: string;
-  Type: string;
-  Function: string;
-  Industry: string;
+type IDataSubset = Omit<IData, 'Link' | 'Date' | 'id'>;
+
+interface ChildComponentProps extends IDataSubset {
   URL: string;
-  image_url: string;
   handlePopUpState: () => void;
-};
+}
 
 export default function DataDetailPage({
   Title,
@@ -44,6 +36,7 @@ export default function DataDetailPage({
   Level,
   URL,
   image_url,
+  Skills,
   handlePopUpState,
 }: ChildComponentProps) {
   function splitLines(text: string) {
@@ -85,6 +78,8 @@ export default function DataDetailPage({
       }
     });
   }
+
+  console.log(Skills);
 
   return (
     <Box

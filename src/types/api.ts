@@ -1,6 +1,6 @@
 export interface IData {
   id: string;
-  Date: string;
+  Date?: string;
   Company: string;
   Title: string;
   Location: string;
@@ -12,4 +12,5 @@ export interface IData {
   Industry: string;
   Link: string;
   image_url: string;
+  Skills: string;
 }
