@@ -48,6 +48,20 @@ export default function Category(props: myprops) {
 
     // send the search term to Google Analytics
     event('search', { search_term: searchText });
+
+    // send search to database
+    fetch('api/data/analytics/search', {
+      // Specify the method and headers
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      // Convert the JavaScript object to a JSON string
+      body: JSON.stringify({
+        search_term: searchText,
+      }),
+    });
   }
 
   return (
