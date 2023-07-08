@@ -1,25 +1,22 @@
-'use client';
-
-import { Fragment } from 'react';
+import { IData } from '@/types/api';
 import {
   Box,
-  Flex,
-  Text,
-  Icon,
-  Link,
-  Image,
   Button,
   Center,
+  Flex,
   Grid,
+  Icon,
+  Image,
+  Link,
+  Text,
 } from '@chakra-ui/react';
-import { MdLocationOn } from 'react-icons/md';
-import { RiBuildingFill } from 'react-icons/ri';
+import { Fragment } from 'react';
 import { BsPersonFillGear } from 'react-icons/bs';
-import { RiMoneyDollarCircleFill } from 'react-icons/ri';
+import { MdLocationOn } from 'react-icons/md';
+import { RiBuildingFill, RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { iconPicker } from '../../lib/iconPicker';
-import { IData } from '@/types/api';
-import { SkillPill } from './SkillPill';
 import splitStringToList from '../../lib/stringToListHelper';
+import { SkillPill } from './SkillPill';
 
 type IDataSubset = Omit<IData, 'Link' | 'Date' | 'id'>;
 
