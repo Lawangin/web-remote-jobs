@@ -109,10 +109,10 @@ export default function Home() {
         ''
       )}
       {loading ? (
-        <Text textAlign="center" mt="20px" fontSize="20px">
+        <>
           <LoadingSkeleton />
           <LoadingSkeleton />
-        </Text>
+        </>
       ) : (
         dashboardList()
       )}

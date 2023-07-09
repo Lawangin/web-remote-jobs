@@ -47,24 +47,21 @@ export default function LoadingSkeleton() {
         margin="auto"
         gap={'4'}
       >
-        <Flex align="center" justifySelf="start">
-          <Skeleton width="30px" height="28px"></Skeleton>
-          <Skeleton width="130px" height="28px" ml="8px"></Skeleton>
-        </Flex>
-        <Flex align="center" justifySelf="start">
-          <Skeleton width="30px" height="28px"></Skeleton>
-          <Skeleton width="130px" height="28px" ml="8px"></Skeleton>
-        </Flex>
-        <Flex align="center" justifySelf="start">
-          <Skeleton width="30px" height="28px"></Skeleton>
-          <Skeleton width="130px" height="28px" ml="8px"></Skeleton>
-        </Flex>
-        <Flex align="center" justifySelf="start">
-          <Skeleton width={['40px', '30px']} height="28px"></Skeleton>
-          <Skeleton width={['40px', '30px']} height="28px" ml="5px"></Skeleton>
-          <Skeleton width={['40px', '30px']} height="28px" ml="5px"></Skeleton>
-          <Skeleton width={['40px', '30px']} height="28px" ml="5px"></Skeleton>
-          <Skeleton width={['60px', '30px']} height="28px" ml="5px"></Skeleton>
+        {[...Array(3)].map((_, i) => (
+          <Flex align="center" justifySelf="start" key={i}>
+            <Skeleton w="30px" h="28px" />
+            <Skeleton w="130px" h="28px" ml={'8px'} />
+          </Flex>
+        ))}
+        <Flex align="center">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton
+              w={['40px', '30px']}
+              h="28px"
+              ml={i > 0 ? '5px' : 0}
+              key={i}
+            />
+          ))}
         </Flex>
       </Grid>
       <Box
