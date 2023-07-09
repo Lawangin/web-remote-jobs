@@ -49,7 +49,7 @@ export default function DisplayData({
     handleBgColor();
   };
 
-  const skillsList = splitStringToList(Skills);
+  const skillsList = splitStringToList(Skills) || null;
 
   return (
     <Box

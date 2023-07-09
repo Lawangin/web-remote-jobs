@@ -1,5 +1,5 @@
 export default function splitStringToList(
-  inputString: string
+  inputString: string | null
 ): string[] | null {
   if (inputString === null) {
     return null;

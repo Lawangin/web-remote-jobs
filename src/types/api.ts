@@ -12,5 +12,5 @@ export interface IData {
   Industry: string;
   Link: string;
   image_url: string;
-  Skills: string;
+  Skills: string | null;
 }

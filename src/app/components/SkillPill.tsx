@@ -1,7 +1,7 @@
 import { Badge, Stack, Text, Tooltip } from '@chakra-ui/react';
 
 interface IProps {
-  skills: string[];
+  skills: string[] | null;
   shortVersion?: boolean;
 }
 
