@@ -23,25 +23,31 @@ export const SkillPill = ({ skills, shortVersion = false }: IProps) => {
     return colorSchemes[randomIndex];
   };
 
-  const firstThreeSkills = skills.slice(0, 3);
-  const remainingSkills = skills.slice(3);
-  const moreLength = remainingSkills.length;
+  let firstThreeSkills;
+  let remainingSkills;
+  let moreLength;
+
+  if (skills !== null) {
+    firstThreeSkills = skills.slice(0, 3);
+    remainingSkills = skills.slice(3);
+    moreLength = remainingSkills.length;
+  }
 
   return (
     <Stack direction="row" pl={'1'} flexWrap="wrap">
-      {skills.length > 1 ? (
+      {skills !== null ? (
         <>
-          {firstThreeSkills.map((skill, k) => (
+          {firstThreeSkills?.map((skill, k) => (
             <Badge key={k} colorScheme={getRandomColorScheme()}>
               {skill}
             </Badge>
           ))}
-          {shortVersion && remainingSkills.length > 0 ? (
-            <Tooltip label={remainingSkills.join(', ')} placement="top">
+          {shortVersion && remainingSkills && remainingSkills.length > 0 ? (
+            <Tooltip label={remainingSkills?.join(', ')} placement="top">
               <Badge>+{moreLength} more</Badge>
             </Tooltip>
           ) : (
-            remainingSkills.map((skill, k) => (
+            remainingSkills?.map((skill, k) => (
               <Badge key={k} colorScheme={getRandomColorScheme()}>
                 {skill}
               </Badge>
