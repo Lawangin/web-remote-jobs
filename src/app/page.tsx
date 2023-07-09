@@ -7,6 +7,7 @@ import AboutUs from './components/AboutUs';
 import Category from './components/category';
 import DisplayData from './components/DisplayData';
 import TopBar from './components/TopBar';
+import LoadingSkeleton from './components/LoadingSkeleton';
 import DashboardContext from './context/DashboardContext';
 import { useFetchDashboard } from './hooks/useFetchDashboard';
 import { useInfiniteScroll } from './hooks/useInfiniteScroll';
@@ -108,9 +109,10 @@ export default function Home() {
         ''
       )}
       {loading ? (
-        <Text textAlign="center" mt="20px" fontSize="20px">
-          Loading...
-        </Text>
+        <>
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+        </>
       ) : (
         dashboardList()
       )}
