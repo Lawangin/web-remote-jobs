@@ -1,6 +1,7 @@
 'use client';
 import { Text, Box, Flex } from '@chakra-ui/react';
 
+// delete later
 export default function AboutUs() {
   return (
     <Box
