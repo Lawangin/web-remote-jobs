@@ -40,8 +40,12 @@ export default function TopBar(props: myprops) {
         justifyContent="center"
         borderBottom="2px solid #e1e1e1"
       >
-        <Box width={['80px', '0', '0', '0']} mr={['20px', '0']}>
-          <Image src={logo} alt="logo"></Image>
+        <Box
+          width={['80px', '0', '0', '0']}
+          mr={['20px', '0']}
+          mt={['5px', '0', '0', '0']}
+        >
+          <Image src={logo} alt="logo" height={50}></Image>
         </Box>
         <Btn onClick={() => props.handleAboutUsPage(false)}>Find Work</Btn>
         <Flex
