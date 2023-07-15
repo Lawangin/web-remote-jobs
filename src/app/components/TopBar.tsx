@@ -33,18 +33,14 @@ export default function TopBar(props: myprops) {
       </Box>
       <Box
         backgroundColor="#fff"
-        maxW="100%"
+        maxW={['100%', '100%', null, null]}
         px="auto"
         py="28px"
         display="flex"
-        justifyContent="center"
+        justifyContent={['space-evenly', 'center']}
         borderBottom="2px solid #e1e1e1"
       >
-        <Box
-          width={['80px', '0', '0', '0']}
-          mr={['20px', '0']}
-          mt={['5px', '0', '0', '0']}
-        >
+        <Box width={['120px', '0', '0', '0']} mr={['20px', '0']}>
           <Image src={logo} alt="logo" height={50}></Image>
         </Box>
         <Btn onClick={() => props.handleAboutUsPage(false)}>Find Work</Btn>
@@ -61,7 +57,12 @@ export default function TopBar(props: myprops) {
             color="#006333"
           />
           <Link href="/" ml="5px" onClick={() => props.handleAboutUsPage()}>
-            <Text fontSize="12px" fontWeight="700" color="black">
+            <Text
+              fontSize="12px"
+              fontWeight="700"
+              color="black"
+              display={['None', 'block', 'block', null]}
+            >
               Learn How It Works
             </Text>
           </Link>
