@@ -1,38 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Remote IT Job Listings
+
+This repository contains the source code for a Next.js based web application that serves as a portal for remote IT job listings. Jobs are scraped daily from various sources on the internet to provide the most recent and relevant opportunities.
+
+The application utilizes a modern technology stack with TypeScript and Chakra UI for robust type checking and a sleek, accessible user interface.
+
+## Technologies Used
+
+- Next.js: A React.js framework used for building the user interface.
+- TypeScript: A statically typed superset of JavaScript enhancing the code quality and understandability.
+- Chakra UI: A simple, modular and accessible UI library that provides a set of composable React components.
+
+## Features
+
+- Display listings of remote IT jobs, updated daily.
+- Comprehensive job details, including job description, company, location, and how to apply.
+- Responsive design, optimized for various screen sizes.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed the latest version of Node.js and npm.
+- You have a basic understanding of TypeScript and React.
+
+### Installation
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/your-username/remote-it-job-listings.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd remote-it-job-listings
+```
+
+3. Install the project dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Running the application
+
+After the installation is complete, you can start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contributing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Contributions, issues, and feature requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please make sure to update tests as appropriate.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## License
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project is open-source, licensed under the [MIT License](LICENSE).
 
-## Learn More
+## Contact
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you want to contact me, you can reach me at lawangin.khan@gmail.com.
